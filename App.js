@@ -1,12 +1,31 @@
+// React, React Native, & Expo Imports
 import { StatusBar } from "expo-status-bar";
 import { useCallback, useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, Animated } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  Linking,
+  Platform,
+  Alert,
+} from "react-native";
+import * as ImagePicker from "expo-image-picker";
 import * as SplashScreen from "expo-splash-screen";
+
+// Custom Component Imports
+import PhotoSelector from "./components/PhotoSelector";
+import Button from "./components/Button";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [cameraPermission, setCameraPermission] =
+    ImagePicker.useCameraPermissions();
+  const [libraryPermission, setLibraryPermission] =
+    ImagePicker.useMediaLibraryPermissions();
 
   useEffect(() => {
     async function prepare() {
@@ -50,25 +69,122 @@ export default function App() {
   // }, []);
 
   // App View
+
+  // Checking if the user will allow the app to access the camera roll
+  const pickPhotoAsync = async () => {
+    // Check first if the user has granted permissions, and do not proceed until they have
+    if (libraryPermission?.granted != true) {
+      const { status } = await setLibraryPermission();
+      if (status != "granted") {
+        alertMessage();
+        return;
+      }
+    }
+    // Passed the initial permissions check which means they can choose a photo
+    const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      quality: 1,
+    });
+    //Check if the user canceled the image selection process and retrieve an image only if they did not cancel
+    if (result.canceled) {
+      return;
+    } else {
+      setSelectedImage(result.assets[0].uri);
+    }
+  };
+
+  // Check if the user will allow access to the camera
+  const takePhotoAsync = async () => {
+    // Check first if the user has granted permissions, and do not proceed until they have
+    if (cameraPermission?.granted != true) {
+      const { status } = await setCameraPermission();
+      if (status != "granted") {
+        alertMessage();
+        return;
+      }
+    }
+    // Passed the initial permissions check which means they can take a photo
+    const photo = await ImagePicker.launchCameraAsync({
+      allowsEditing: true,
+      quality: 1,
+    });
+    if (photo.canceled == true) {
+      return;
+    } else {
+      setSelectedImage(photo.assets[0].uri);
+    }
+  };
+
+  const alertMessage = () => {
+    Alert.alert(
+      "No access to camera",
+      "Access to the camera is needed to take photos",
+      [
+        { text: "Cancel", style: "cancel" },
+        { text: "Settings", onPress: () => openAppSettings() },
+      ]
+    );
+  };
+
+  //Function that opens up the app settings
+  const openAppSettings = async () => {
+    if (Platform.OS == "ios") {
+      Linking.openURL("app-settings:");
+    } else if (Platform.OS == "android") {
+      await Linking.openSettings();
+    }
+  };
+
+  // App view
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <Text style={styles.text}>This is your app. Customize away!</Text>
+      {/* Async function to choose a photo from the camera roll */}
+      <View style={styles.terrarium}>
+        <Button label="Terrarium" type="terrarium" />
+      </View>
+
+      <View style={styles.plantIdentify}>
+        <Button label="Identify" type="identify" onPress={takePhotoAsync} />
+        <Button label="Camera Roll" type="identify" onPress={pickPhotoAsync} />
+      </View>
+
+      <View style={styles.footerContainer}>
+        <Button label="Explore" />
+        <Button label="Learn" />
+        <Button label="Care" />
+      </View>
+
       <StatusBar style="auto" />
     </View>
   );
 }
 
+//Styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: "column",
-    backgroundColor: "#76b947",
-    justifyContent: "center",
+    flex: 1, //grows gorizontally and vertically to fill the free space (entire screen in this case)
+    backgroundColor: "#FFFFFA",
     alignItems: "center",
+    justifyContent: "center",
   },
-  text: {
-    flexDirection: "row",
+
+  terrarium: {
+    paddingTop: 90,
+    flex: 1 / 3,
+    bottom: 0,
+  },
+
+  footerContainer: {
+    flex: 1 / 5,
     alignItems: "center",
-    justifyContent: "center",
+    bottom: 14,
+    flexDirection: "row",
+  },
+
+  plantIdentify: {
+    flex: 1 / 3,
+    alignItems: "center",
+    bottom: 0,
+    flexDirection: "row",
   },
 });
