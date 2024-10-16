@@ -14,7 +14,6 @@ import * as ImagePicker from "expo-image-picker";
 import * as SplashScreen from "expo-splash-screen";
 
 // Custom Component Imports
-import PhotoSelector from "./components/PhotoSelector";
 import Button from "./components/Button";
 
 SplashScreen.preventAutoHideAsync();
@@ -112,6 +111,7 @@ export default function App() {
       return;
     } else {
       setSelectedImage(photo.assets[0].uri);
+      console.log(photo.assets[0].uri);
     }
   };
 
