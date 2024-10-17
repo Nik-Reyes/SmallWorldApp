@@ -35,12 +35,12 @@ const getPhotoUrl = async (imageName) => {
   const storage = getStorage();
   const imageReference = ref(storage, `images/${imageName}`);
   const downloadUrl = await getDownloadURL(imageReference);
-  console.log("Download URL: " + downloadUrl);
+  //console.log("Download URL: " + downloadUrl);
   return downloadUrl;
 };
 
 const firebaseUpload = async (uri, name) => {
-  console.log("config file fileName: " + name);
+  //console.log("config file fileName: " + name);
   //get the URI
   const fetchResponse = await fetch(uri);
   //convert URI to a blob

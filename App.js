@@ -4,11 +4,10 @@ import { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View, Linking, Platform, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as SplashScreen from "expo-splash-screen";
-import { fbApp, firebaseUpload, getPhotoUrl } from "./firebaseConfig";
+import { firebaseUpload, getPhotoUrl } from "./firebaseConfig";
 
 // Custom Component Imports
 import Button from "./components/Button";
-import { list } from "firebase/storage";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -65,10 +64,11 @@ export default function App() {
       quality: 1,
     });
     //Check if the user canceled the image selection process and retrieve an image only if they did not cancel
-    if (result.canceled) {
-      return;
+    if (!result.canceled) {
+      const libraryPhoto = await obtainPhotoUrl(result);
+      console.log("Library Photo URL: " + libraryPhoto);
     } else {
-      //console.log(result.assets[0].uri);
+      return;
     }
   };
 
@@ -88,22 +88,11 @@ export default function App() {
         allowsEditing: true,
         quality: 1,
       });
-      if (photo.canceled == true) {
-        return;
+      if (!photo.canceled == true) {
+        const snappedPhoto = await obtainPhotoUrl(photo);
+        console.log("Snapped Photo URL: " + snappedPhoto);
       } else {
-        const { fileName, uri } = photo.assets[0];
-        //console.log("URI: " + photo.assets[0].uri);
-        let augmentedFileName = fileName;
-        // Create a fileName for assets object if no fileName is created automatically
-        augmentedFileName = fileName || uri.split("/").pop();
-        //console.log("Generated file name:", augmentedFileName);
-
-        const uploadResponse = await firebaseUpload(uri, augmentedFileName);
-        console.log("Upload Response: ", uploadResponse);
-
-        // Photo URL can then be used to get
-        const fbPhotoUrl = await getPhotoUrl(augmentedFileName);
-        console.log("App.js download url: " + fbPhotoUrl);
+        return;
       }
     } catch (e) {
       Alert.alert("Error uploading image " + e.message);
@@ -128,6 +117,21 @@ export default function App() {
     } else if (Platform.OS == "android") {
       await Linking.openSettings();
     }
+  };
+
+  const obtainPhotoUrl = async (img) => {
+    const { fileName, uri } = img.assets[0];
+    //console.log("URI: " + photo.assets[0].uri);
+    let augmentedFileName = fileName;
+    // Create a fileName for assets object if no fileName is created automatically
+    augmentedFileName = fileName || uri.split("/").pop();
+    //console.log("Generated file name:", augmentedFileName);
+
+    const uploadResponse = await firebaseUpload(uri, augmentedFileName);
+    //console.log("Snapped Photo Upload Response: ", uploadResponse);
+
+    const fbPhotoUrl = await getPhotoUrl(augmentedFileName);
+    return fbPhotoUrl;
   };
 
   // App view
