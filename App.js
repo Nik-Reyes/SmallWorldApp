@@ -1,48 +1,40 @@
 // React, React Native, & Expo Imports
 import { StatusBar } from "expo-status-bar";
 import { useCallback, useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  Linking,
-  Platform,
-  Alert,
-} from "react-native";
+import { StyleSheet, View, Linking, Platform, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as SplashScreen from "expo-splash-screen";
+import { fbApp, firebaseUpload, getPhotoUrl } from "./firebaseConfig";
 
 // Custom Component Imports
-import PhotoSelector from "./components/PhotoSelector";
 import Button from "./components/Button";
+import { list } from "firebase/storage";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
   const [cameraPermission, setCameraPermission] =
     ImagePicker.useCameraPermissions();
   const [libraryPermission, setLibraryPermission] =
     ImagePicker.useMediaLibraryPermissions();
+  const [files, setFiles] = useState([]);
 
   useEffect(() => {
     async function prepare() {
       try {
-        // This is where we will load the fonts and make any Necessary on-boot
+        // This is where we will load any fonts and make any Necessary on-boot
         // API calls. The fonts and API calls are loaded/made AND only then will
         // the setTimeout begin
         await new Promise((resolve) => setTimeout(resolve, 1500));
       } catch (e) {
         console.warn(e);
       } finally {
-        // Once all on-boot loading is completed, make setAppIsReady to true
+        // Once all "on-app-boot" loading is completed, change setAppIsReady to true
         // so that the onLayoutRootView callback can hide the splash screen
         setAppIsReady(true);
       }
     }
-
     prepare();
   }, []);
 
@@ -56,19 +48,6 @@ export default function App() {
   if (!appIsReady) {
     return null;
   }
-
-  // Has the same effect as the SplashScreen code above without all the
-  // error checking and checking whether things like fonts and APIs have
-  // loaded before actually loading the app
-
-  // useEffect(() => {
-  //   SplashScreen.preventAutoHideAsync();
-  //   setTimeout(async () => {
-  //     await SplashScreen.hideAsync();
-  //   }, 2000);
-  // }, []);
-
-  // App View
 
   // Checking if the user will allow the app to access the camera roll
   const pickPhotoAsync = async () => {
@@ -89,29 +68,45 @@ export default function App() {
     if (result.canceled) {
       return;
     } else {
-      setSelectedImage(result.assets[0].uri);
+      //console.log(result.assets[0].uri);
     }
   };
 
   // Check if the user will allow access to the camera
   const takePhotoAsync = async () => {
-    // Check first if the user has granted permissions, and do not proceed until they have
-    if (cameraPermission?.granted != true) {
-      const { status } = await setCameraPermission();
-      if (status != "granted") {
-        alertMessage();
-        return;
+    try {
+      // Check first if the user has granted permissions, and do not proceed until they have
+      if (cameraPermission?.granted != true) {
+        const { status } = await setCameraPermission();
+        if (status != "granted") {
+          alertMessage();
+          return;
+        }
       }
-    }
-    // Passed the initial permissions check which means they can take a photo
-    const photo = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      quality: 1,
-    });
-    if (photo.canceled == true) {
-      return;
-    } else {
-      setSelectedImage(photo.assets[0].uri);
+      // Passed the initial permissions check which means they can take a photo
+      const photo = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+        quality: 1,
+      });
+      if (photo.canceled == true) {
+        return;
+      } else {
+        const { fileName, uri } = photo.assets[0];
+        //console.log("URI: " + photo.assets[0].uri);
+        let augmentedFileName = fileName;
+        // Create a fileName for assets object if no fileName is created automatically
+        augmentedFileName = fileName || uri.split("/").pop();
+        //console.log("Generated file name:", augmentedFileName);
+
+        const uploadResponse = await firebaseUpload(uri, augmentedFileName);
+        console.log("Upload Response: ", uploadResponse);
+
+        // Photo URL can then be used to get
+        const fbPhotoUrl = await getPhotoUrl(augmentedFileName);
+        console.log("App.js download url: " + fbPhotoUrl);
+      }
+    } catch (e) {
+      Alert.alert("Error uploading image " + e.message);
     }
   };
 
