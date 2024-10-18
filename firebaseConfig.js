@@ -1,4 +1,5 @@
 import { initializeApp, getApp, getApps } from "firebase/app";
+// Firebase Storage
 import {
   getStorage,
   ref,
@@ -6,6 +7,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+// .env Varibles
 import {
   FIREBASE_API_KEY,
   FIREBASE_STORAGE_BUCKET,
@@ -13,13 +15,17 @@ import {
   FIREBASE_PROJECT_ID,
   FIREBASE_AUTH_DOMAIN,
 } from "@env";
+// Firebase Auth
+import { getAuth } from "firebase/auth";
+// Firebase Firestore
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: FIREBASE_API_KEY,
-  storageBucket: FIREBASE_STORAGE_BUCKET,
-  appId: FIREBASE_APP_ID,
-  projectId: FIREBASE_PROJECT_ID,
-  authDomain: FIREBASE_AUTH_DOMAIN,
+  apiKey: process.env.FIREBASE_API_KEY,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  appId: process.env.FIREBASE_APP_ID,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
 };
 
 // Known error where the initializeApp() tries to load app multiple time
@@ -29,7 +35,10 @@ if (getApps().length === 0) {
 }
 
 const fbApp = getApp();
+
 const fbStorage = getStorage();
+const fbFirestore = getFirestore(fbApp);
+const fbAuth = getAuth(fbApp);
 
 const getPhotoUrl = async (imageName) => {
   const storage = getStorage();
@@ -73,4 +82,11 @@ const firebaseUpload = async (uri, name) => {
     );
   });
 };
-export { fbApp, fbStorage, firebaseUpload, getPhotoUrl };
+export { 
+  fbApp, 
+  fbStorage, 
+  firebaseUpload, 
+  getPhotoUrl,
+  fbFirestore,
+  fbAuth 
+};

@@ -11,6 +11,8 @@
   "dependencies": {
     "@expo/metro-runtime": "~3.2.3",
     "@react-native-firebase/auth": "^21.0.0",
+    "@react-navigation/native": "^6.1.18",
+    "@react-navigation/native-stack": "^6.11.0",
     "expo": "~51.0.37",
     "expo-image-picker": "~15.0.7",
     "expo-splash-screen": "~0.27.6",
