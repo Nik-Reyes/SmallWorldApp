@@ -2,6 +2,7 @@
   "name": "smallworldproject",
   "version": "1.0.0",
   "main": "expo/AppEntry.js",
+  "type": "commonjs",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -11,11 +12,13 @@
   "dependencies": {
     "@expo/metro-runtime": "~3.2.3",
     "@react-native-firebase/auth": "^21.0.0",
+    "axios": "^1.7.7",
     "expo": "~51.0.37",
     "expo-image-picker": "~15.0.7",
     "expo-splash-screen": "~0.27.6",
     "expo-status-bar": "~1.12.1",
     "firebase": "^10.14.1",
+    "node-fetch": "^3.3.2",
     "pretty-format": "^29.7.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

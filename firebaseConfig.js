@@ -6,6 +6,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+
 import {
   FIREBASE_API_KEY,
   FIREBASE_STORAGE_BUCKET,
@@ -13,6 +14,10 @@ import {
   FIREBASE_PROJECT_ID,
   FIREBASE_AUTH_DOMAIN,
 } from "@env";
+import { PLANTNET_API_KEY } from '@env';
+
+const API_URL = `https://my-api.plantnet.org/v2/identify/all?api-key=${PLANTNET_API_KEY}`;
+
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -20,6 +25,7 @@ const firebaseConfig = {
   appId: FIREBASE_APP_ID,
   projectId: FIREBASE_PROJECT_ID,
   authDomain: FIREBASE_AUTH_DOMAIN,
+  // messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
 };
 
 // Known error where the initializeApp() tries to load app multiple time
