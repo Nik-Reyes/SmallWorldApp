@@ -1,4 +1,6 @@
 import { initializeApp, getApp, getApps } from "firebase/app";
+import { initializeAuth  } from "firebase/auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 // Firebase Storage
 import {
   getStorage,
@@ -82,6 +84,7 @@ const firebaseUpload = async (uri, name) => {
     );
   });
 };
+
 export { 
   fbApp, 
   fbStorage, 

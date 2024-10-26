@@ -1,13 +1,24 @@
 // React, React Native, & Expo Imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Navigation Imports
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import Home from "./screens/Home.js";
+
+// Screens
+import Home from "./screens/home.js";
+import GuestHome from "./screens/guestHome.js";
 import SignIn from "./screens/SignIn";
-import SignUp from "./screens/SignUp";
+import Register from "./screens/Register.js";
+import Explore from "./screens/explore.js";
+import Learn from "./screens/learn.js";
+import Care from "./screens/care.js";
+import ForgotPassword from "./screens/forgotPassword.js";
+
+// Components
 import loadAssets from "./components/loadAssets.js";
+import { onAuthStateChanged } from "firebase/auth";
+import { fbAuth } from "./firebaseConfig.js";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +47,18 @@ export default function App() {
   // Checking if the user will allow the app to access the camera roll
 
 
+  // Check if user is loggedIn
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(fbAuth, (user) => {
+      if (user) {
+        // User is signed In
+        setIsSignedIn(true)
+      } else {
+        setIsSignedIn(false)
+      }
+    })
+    return () => unsubscribe()
+  }, [fbAuth])
   
 
   // App view
@@ -46,17 +69,20 @@ export default function App() {
       {isSignedIn ? 
         <>
           <Stack.Screen name="Home" component={Home}/>
+          <Stack.Screen name="Explore" component={Explore}/>
+          <Stack.Screen name="Learn" component={Learn}/>
+          <Stack.Screen name="Care" component={Care}/>
         </>
         :
         <>
-            <Stack.Screen name="SignIn" component={SignIn}/>
-            <Stack.Screen name="SignUp" component={SignUp}/>
+          <Stack.Screen name="Home" component={GuestHome}/>
+          <Stack.Screen name="SignIn" component={SignIn}/>
+          <Stack.Screen name="Register" component={Register}/>
+          <Stack.Screen name="Forgot Password" component={ForgotPassword}/>
         </> 
         }
 
       </Stack.Navigator>
     </NavigationContainer>
-      
-    
   );
 }
