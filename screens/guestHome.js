@@ -24,7 +24,6 @@ export default function Home({ navigation }) {
   const [libraryPermission, setLibraryPermission] = 
     ImagePicker.useMediaLibraryPermissions();
 
-  const [bgGradient, setBgGradient] = useState("white")
   const [searchInput, setSearchInput] = useState('')
   const [isFocused, setIsFocused] = useState(false)
 

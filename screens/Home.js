@@ -119,7 +119,7 @@ export default function Home({ navigation }) {
               onBlur={() => setIsFocused(false)}
             />
             {!isFocused &&
-              <Pressable onPress={() => alert('Profile Page not yet implemented')}>
+              <Pressable onPress={() => navigation.navigate('Profile')}>
                 <Avatar.Image 
                   size={40} 
                   source={require('../assets/default-profile.jpg')}
@@ -141,7 +141,7 @@ export default function Home({ navigation }) {
 
           <View style={homeStyles.plantIdentify}>
 
-            <Card style={homeStyles.plantIdentifyCards}>
+            <Card style={homeStyles.plantIdentifyCards} onPress={takePhotoAsync}>
               <Card.Content style={homeStyles.plantIdentifyCardsContent}>
                 <Text>Identify</Text>
               </Card.Content>
@@ -155,12 +155,40 @@ export default function Home({ navigation }) {
 
             {/*<ButtonComponent label="Identify" type="identify" onPress={takePhotoAsync} />*/}
             {/*<ButtonComponent label="Camera Roll" type="identify" onPress={pickPhotoAsync} />*/}
-          </View>
 
-          <View>
-            <Text>asd</Text>
-          </View>
+            
 
+          </View>
+<View style={homeStyles.footerContainer}>
+
+              <Card 
+                style={homeStyles.footerCards}
+                onPress={() => navigation.navigate('Explore')}
+              >
+                <Card.Content style={homeStyles.footerCardsContent}>
+                  <Text>Explore</Text>
+                </Card.Content>
+              </Card>
+
+              <Card 
+                style={homeStyles.footerCards}
+                onPress={() => navigation.navigate('Learn')}
+              >
+                <Card.Content style={homeStyles.footerCardsContent}>
+                  <Text>Learn</Text>
+                </Card.Content>
+              </Card>
+
+              <Card 
+                style={homeStyles.footerCards} 
+                onPress={() => navigation.navigate('Care')}
+              >
+                <Card.Content style={homeStyles.footerCardsContent}>
+                  <Text>Care</Text>
+                </Card.Content>
+              </Card>
+
+            </View>
 
         </View>
         <StatusBar style="auto" />

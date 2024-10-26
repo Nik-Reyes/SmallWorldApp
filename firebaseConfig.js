@@ -1,6 +1,5 @@
 import { initializeApp, getApp, getApps } from "firebase/app";
-import { initializeAuth  } from "firebase/auth";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getAuth } from "firebase/auth";
 // Firebase Storage
 import {
   getStorage,
@@ -9,6 +8,9 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
 // .env Varibles
 import {
   FIREBASE_API_KEY,
@@ -17,8 +19,6 @@ import {
   FIREBASE_PROJECT_ID,
   FIREBASE_AUTH_DOMAIN,
 } from "@env";
-// Firebase Auth
-import { getAuth } from "firebase/auth";
 // Firebase Firestore
 import { getFirestore } from "firebase/firestore";
 

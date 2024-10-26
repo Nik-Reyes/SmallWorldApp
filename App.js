@@ -14,6 +14,7 @@ import Explore from "./screens/explore.js";
 import Learn from "./screens/learn.js";
 import Care from "./screens/care.js";
 import ForgotPassword from "./screens/forgotPassword.js";
+import Profile from "./screens/profile.js";
 
 // Components
 import loadAssets from "./components/loadAssets.js";
@@ -72,6 +73,7 @@ export default function App() {
           <Stack.Screen name="Explore" component={Explore}/>
           <Stack.Screen name="Learn" component={Learn}/>
           <Stack.Screen name="Care" component={Care}/>
+          <Stack.Screen name="Profile" component={Profile}/>
         </>
         :
         <>
