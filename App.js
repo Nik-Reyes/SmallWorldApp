@@ -1,13 +1,30 @@
 // React, React Native, & Expo Imports
 import { StatusBar } from "expo-status-bar";
 import { useCallback, useEffect, useState } from "react";
-import { StyleSheet, View, Linking, Platform, Alert } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Linking,
+  Platform,
+  Alert,
+  ImageBackground,
+} from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as SplashScreen from "expo-splash-screen";
 import { firebaseUpload, getPhotoUrl } from "./firebaseConfig";
+import { LinearGradient } from "expo-linear-gradient";
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // Custom Component Imports
 import Button from "./components/Button";
+
+const plantImage = require("./assets/TopComponent.png");
+const exploreImage = require("./assets/explore.jpg");
+const learnImage = require("./assets/learn.jpg");
+const careImage = require("./assets/Care.jpg");
+const terrariumImage = require("./assets/garden.png");
 
 SplashScreen.preventAutoHideAsync();
 
@@ -137,22 +154,58 @@ export default function App() {
   // App view
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
+      <LinearGradient
+        colors={["#e0f0e3", "whitesmoke", "#e0f0e3"]}
+        start={{ x: 0.5, y: 1 }}
+        end={{ x: 0, y: 0 }}
+        locations={[0.01, 0.4, 0.8]}
+        style={{ flex: 1, position: "absolute", width: "100%", height: "100%" }}
+      ></LinearGradient>
+
+      <ImageBackground source={plantImage} style={styles.image}>
+        <LinearGradient
+          colors={[
+            "rgba(224,240,227, 1)",
+            "rgba(224,240,227, 0.5)",
+            "rgba(224,240,227, 0)",
+          ]}
+          start={{ x: 0.5, y: 1 }}
+          end={{ x: 0.5, y: 0 }}
+          style={styles.imageOverlay}
+        />
+      </ImageBackground>
+
       {/* Async function to choose a photo from the camera roll */}
       <View style={styles.terrarium}>
-        <Button label="Terrarium" type="terrarium" />
+        <Button
+          label="terrarium"
+          imgSrc={terrariumImage}
+          onPress={() => console.log("Terrarium Button Pressed")}
+        />
       </View>
 
       <View style={styles.plantIdentify}>
-        <Button label="Identify" type="identify" onPress={takePhotoAsync} />
-        <Button label="Camera Roll" type="identify" onPress={pickPhotoAsync} />
+        <Button label="identify" onPress={takePhotoAsync} />
+        <Button label="identify" onPress={pickPhotoAsync} />
       </View>
 
       <View style={styles.footerContainer}>
-        <Button label="Explore" />
-        <Button label="Learn" />
-        <Button label="Care" />
+        <Button
+          label="Explore"
+          imgSrc={exploreImage}
+          onPress={() => console.log("Explore Button Pressed")}
+        />
+        <Button
+          label="Learn"
+          imgSrc={learnImage}
+          onPress={() => console.log("Learn Button Pressed")}
+        />
+        <Button
+          label="Care"
+          imgSrc={careImage}
+          onPress={() => console.log("Care Button Pressed")}
+        />
       </View>
-
       <StatusBar style="auto" />
     </View>
   );
@@ -178,6 +231,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     bottom: 14,
     flexDirection: "row",
+    gap: 7,
   },
 
   plantIdentify: {
@@ -185,5 +239,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     bottom: 0,
     flexDirection: "row",
+  },
+
+  image: {
+    height: 200,
+    top: -20,
+    position: "absolute",
+    width: "100%",
+  },
+
+  imageOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(255, 255, 255, 0)",
   },
 });
