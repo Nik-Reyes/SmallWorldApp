@@ -1,17 +1,4 @@
-import { initializeApp, getApp, getApps } from "firebase/app";
-import { getAuth } from "firebase/auth";
-// Firebase Storage
-import {
-  getStorage,
-  ref,
-  listAll,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "firebase/storage";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-// .env Varibles
 import {
   FIREBASE_API_KEY,
   FIREBASE_STORAGE_BUCKET,
@@ -19,8 +6,24 @@ import {
   FIREBASE_PROJECT_ID,
   FIREBASE_AUTH_DOMAIN,
 } from "@env";
-// Firebase Firestore
+
 import { getFirestore } from "firebase/firestore";
+import { 
+  signOut,
+  getReactNativePersistence,
+  initializeAuth,
+  getAuth,
+  signInWithEmailAndPassword
+} from "firebase/auth";
+import { initializeApp, getApp, getApps } from "firebase/app";
+import {
+  getStorage,
+  ref,
+  listAll,
+  uploadBytesResumable,
+  getDownloadURL, 
+} from "firebase/storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -34,13 +37,13 @@ const firebaseConfig = {
 // load only when the app has not been initialised
 if (getApps().length === 0) {
   initializeApp(firebaseConfig);
-}
-
+}  
 const fbApp = getApp();
-
 const fbStorage = getStorage();
 const fbFirestore = getFirestore(fbApp);
-const fbAuth = getAuth(fbApp);
+const fbAuth = initializeAuth(fbApp, {
+  persistence: getReactNativePersistence(AsyncStorage)
+})
 
 const getPhotoUrl = async (imageName) => {
   const storage = getStorage();
@@ -85,11 +88,40 @@ const firebaseUpload = async (uri, name) => {
   });
 };
 
+const signInUser = async (email, password) => {
+
+  signInWithEmailAndPassword(fbAuth, email, password)
+  .catch((error) => {
+    console.error("Error during Sign-in:", error);
+  })
+
+};
+
+const signOutUser = async () => {
+  await signOut(fbAuth)
+  .then(() => {
+    console.log("User signed Out");
+    //AsyncStorage.removeItem("userToken") 
+    //AsyncStorage.getItem("userToken")
+    // .then(()=> {
+    //   console.log('Token is now null: ', token)
+    // }) 
+    // .catch((error) => {
+    //   console.error('Token still holds a value: ', token)
+    // })
+  })
+  .catch((error) => {
+    console.error("Error during sign out: ", error)
+  })
+}
+
 export { 
   fbApp, 
   fbStorage, 
   firebaseUpload, 
   getPhotoUrl,
   fbFirestore,
-  fbAuth 
+  fbAuth,
+  signInUser,
+  signOutUser,
 };

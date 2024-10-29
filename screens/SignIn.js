@@ -5,7 +5,7 @@ import { Button, Checkbox, Icon, TextInput } from "react-native-paper";
 import { Link } from "@react-navigation/native";
 import KeyboardAvoidingContainer from "../components/KeyboardAvoidingContainer";
 import { setPersistence, signInWithEmailAndPassword, browserLocalPersistence } from "firebase/auth";
-import { fbAuth } from "../firebaseConfig";
+import { fbAuth, signInUser } from "../firebaseConfig";
 
 export default function SignIn() {
 
@@ -26,13 +26,7 @@ export default function SignIn() {
         const validInputs = validateInputs()
         if(validInputs) {
         
-            signInWithEmailAndPassword(fbAuth, email, password)
-            .then((userCredential) => {
-                alert('You are now signed in')
-            })
-            .catch((error) => {
-                alert('Error Signing in')
-            })
+            signInUser(email, password)
             
         } else {
             alert('Invalid Inputs')

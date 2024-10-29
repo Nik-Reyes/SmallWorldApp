@@ -111,12 +111,13 @@ export default function Home({ navigation }) {
           <View style={homeStyles.headerContainer}>
             <TextInput 
               style={[homeStyles.textInput, isFocused && homeStyles.isFocused]}
-              mode="flat"
+              mode="outlined"
               label="Find a Plant"
               value={searchInput}
               onChangeText={searchInput => setSearchInput(searchInput)}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
+              activeOutlineColor="#48AC54"
             />
             {!isFocused &&
               <Pressable onPress={() => navigation.navigate('Profile')}>

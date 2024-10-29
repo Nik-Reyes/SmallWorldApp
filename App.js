@@ -50,17 +50,21 @@ export default function App() {
 
   // Check if user is loggedIn
   useEffect(() => {
+    
     const unsubscribe = onAuthStateChanged(fbAuth, (user) => {
       if (user) {
         // User is signed In
         setIsSignedIn(true)
+        console.log("User is Signed In")
       } else {
         setIsSignedIn(false)
+        console.log("User is Signed Out")
       }
     })
-    return () => unsubscribe()
-  }, [fbAuth])
-  
+
+    return () => unsubscribe();
+    
+  }, [])
 
   // App view
   return (

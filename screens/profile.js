@@ -2,7 +2,7 @@ import { Text } from "react-native";
 import { Button } from "react-native-paper";
 import KeyboardAvoidingContainer from "../components/KeyboardAvoidingContainer";
 import { signOut } from "firebase/auth"
-import { fbAuth, fbFirestore } from "../firebaseConfig";
+import { fbAuth, fbFirestore, signOutUser } from "../firebaseConfig";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
@@ -24,15 +24,6 @@ export default function Profile() {
         fetchUserData()
     }, [fbAuth])    
 
-    const signUserOut = async() => {
-        try {
-            await signOut(fbAuth)
-            alert('User has signed out')
-        } catch(error) {
-            alert('Error Signing Out: ' + String(error))
-        }
-    }
-
     return (
         <KeyboardAvoidingContainer>
             <Text>This is the profile page</Text>
@@ -41,7 +32,7 @@ export default function Profile() {
             }
             <Button 
                 mode="contained"
-                onPress={signUserOut}
+                onPress={signOutUser}
             > Sign Out
             </Button>
         </KeyboardAvoidingContainer>
