@@ -19,7 +19,7 @@ import {
 // } from "@env";
 // import { PLANTNET_API_KEY } from '@env';
 
-const API_URL = `https://my-api.plantnet.org/v2/identify/all?api-key=${process.env.PLANTNET_API_KEY}`;
+const API_URL = 'https://my-api.plantnet.org/v2/identify/all?api-key=2b10b5BBeinjraYHuiW1SKcN';
 
 
 // const firebaseConfig = {
@@ -58,7 +58,7 @@ const getPhotoUrl = async (imageName) => {
 };
 
 // const firebaseUpload = async (uri, name) => 
-const firebaseUpload = async (imageUri, name) =>{
+const firebaseUpload = async (imageUri, name) => {
 
   console.log("config file fileName: " + name);
   //get the URI
@@ -69,7 +69,7 @@ const firebaseUpload = async (imageUri, name) =>{
   // // Read file as a binary string using expo-file-system
   // const file = await FileSystem.readAsStringAsync(imageUri, {
   //   encoding: FileSystem.EncodingType.Base64,});
-  
+
   //   // Convert the base64 string to binary data
   //   const binaryString = atob(file);
   //   const len = binaryString.length;
@@ -79,8 +79,8 @@ const firebaseUpload = async (imageUri, name) =>{
   //       bytes[i] = binaryString.charCodeAt(i);
   //   }
 
-    // const blob = new Blob([bytes], { type: 'image/jpeg' });   
-    const imageRef = ref(fbStorage, `images/${name}`);
+  // const blob = new Blob([bytes], { type: 'image/jpeg' });   
+  const imageRef = ref(fbStorage, `images/${name}`);
 
 
   // //store the filename in the desired path: `images/ with the fileName`--Stored w/-->getStorage()
@@ -100,7 +100,7 @@ const firebaseUpload = async (imageUri, name) =>{
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
+        console.log(`Upload is ${progress}% done`);
       },
       (error) => {
         // if some error occurs, then reject the upload process before the upload task is complete
