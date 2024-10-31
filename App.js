@@ -5,6 +5,8 @@ import { StyleSheet, View, Linking, Platform, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as SplashScreen from "expo-splash-screen";
 import { fbApp, firebaseUpload, getPhotoUrl } from "./firebaseConfig";
+import { callPlantApi, processImage } from './plant-recognition';
+import * as FileSystem from "expo-file-system"
 
 // Custom Component Imports
 import Button from "./components/Button";
@@ -64,11 +66,22 @@ export default function App() {
       allowsEditing: true,
       quality: 1,
     });
-    //Check if the user canceled the image selection process and retrieve an image only if they did not cancel
-    if (result.canceled) {
-      return;
-    } else {
-      //console.log(result.assets[0].uri);
+    // //Check if the user canceled the image selection process and retrieve an image only if they did not cancel
+    // if (result.canceled) {
+    //   return;
+    // // } else {
+    // //   //console.log(result.assets[0].uri);
+    // // }
+    if (!result.canceled) {
+      const uri = result.assets[0].uri;
+      const fileName = uri.split("/").pop();
+      const localUri = `${FileSystem.documentDirectory}${fileName}`;
+      
+      // Copy file to the document directory
+      await FileSystem.copyAsync({ from: uri, to: localUri });
+      
+      const organ = 'flower';
+      await processImage(localUri, organ);
     }
   };
 
@@ -91,20 +104,35 @@ export default function App() {
       if (photo.canceled == true) {
         return;
       } else {
-        const { fileName, uri } = photo.assets[0];
-        //console.log("URI: " + photo.assets[0].uri);
-        let augmentedFileName = fileName;
-        // Create a fileName for assets object if no fileName is created automatically
-        augmentedFileName = fileName || uri.split("/").pop();
-        //console.log("Generated file name:", augmentedFileName);
+        // const { fileName, uri } = photo.assets[0];
+        // //console.log("URI: " + photo.assets[0].uri);
+        // let augmentedFileName = fileName;
+        // // Create a fileName for assets object if no fileName is created automatically
+        // augmentedFileName = fileName || uri.split("/").pop();
+        // //console.log("Generated file name:", augmentedFileName);
+        const uri = photo.assets[0].uri;
+        const fileName = uri.split("/").pop();
+        
+        // Save to Expo's document directory if necessary
+        const localUri = `${FileSystem.documentDirectory}${fileName}`;
+        await FileSystem.copyAsync({
+          from: uri,
+          to: localUri,
+        });
 
-        const uploadResponse = await firebaseUpload(uri, augmentedFileName);
+        const uploadResponse = await firebaseUpload(localUri, fileName);
         console.log("Upload Response: ", uploadResponse);
 
-        // Photo URL can then be used to get
-        const fbPhotoUrl = await getPhotoUrl(augmentedFileName);
-        console.log("App.js download url: " + fbPhotoUrl);
+        /// Get download URL and process image
+        const fbPhotoUrl = await getPhotoUrl(fileName);
+        if (fbPhotoUrl) {
+          const organ = 'flower';
+          await processImage(fbPhotoUrl, organ);
+        } else {
+          console.warn("Failed to retrieve photo URL.");
+        }
       }
+
     } catch (e) {
       Alert.alert("Error uploading image " + e.message);
     }
