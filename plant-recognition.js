@@ -6,6 +6,7 @@ import Config from 'react-native-config';
 
 // PlantNet API constants
 const API_KEY = Config.PLANTNET_API_KEY;
+// const API_URL = 'http://192.168.1.32:8081/api/identify/all?api-key=2b10b5BBeinjraYHuiW1SKcN'; // Change the port if needed
 const API_URL = 'https://my-api.plantnet.org/v2/identify/all?api-key=2b10b5BBeinjraYHuiW1SKcN';
 
 // Call the PlantNet API with the image URL
@@ -23,7 +24,7 @@ const callPlantApi = async (downloadURL, organ) => {
             headers: { 
                 // headers: form.getHeaders(),
                 'Content-Type': 'multipart/form-data',
-                'Authorization': `Bearer ${API_KEY}` // Add this line if the API requires Bearer token
+                'Authorization': `Bearer ${'2b10AYemxBmUt7qKBoWFpFq9u'}` // Add this line if the API requires Bearer token
             },
             
         });
