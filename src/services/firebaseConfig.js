@@ -2,7 +2,6 @@ import { initializeApp, getApp, getApps } from "firebase/app";
 import {
   getStorage,
   ref,
-  listAll,
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
@@ -31,7 +30,7 @@ if (getApps().length === 0) {
 const fbApp = getApp();
 const fbStorage = getStorage();
 
-const getPhotoUrl = async (imageName) => {
+export const getPhotoUrl = async (imageName) => {
   const storage = getStorage();
   const imageReference = ref(storage, `images/${imageName}`);
   const downloadUrl = await getDownloadURL(imageReference);
@@ -39,7 +38,7 @@ const getPhotoUrl = async (imageName) => {
   return downloadUrl;
 };
 
-const firebaseUpload = async (uri, name) => {
+export const firebaseUpload = async (uri, name) => {
   //console.log("config file fileName: " + name);
   //get the URI
   const fetchResponse = await fetch(uri);
@@ -73,4 +72,4 @@ const firebaseUpload = async (uri, name) => {
     );
   });
 };
-export { fbApp, fbStorage, firebaseUpload, getPhotoUrl };
+export { fbApp, fbStorage };

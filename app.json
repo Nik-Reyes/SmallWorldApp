@@ -4,10 +4,10 @@
     "slug": "SmallWorldProject",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/smallWorldIcon.png",
+    "icon": "./assets/images/smallWorldIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/smallWorldSplash.png",
+      "image": "./assets/images/smallWorldSplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
@@ -33,7 +33,9 @@
           "photosPermission": "Allow $(PRODUCT_NAME) to access your camera roll",
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
         }
-      ]
+      ],
+      "expo-font",
+      "expo-asset"
     ]
   }
 }
