@@ -1,5 +1,5 @@
 // React, React Native, & Expo Imports
-import TabNavigation from "./src/navigation/TabNavigation";
+import HomeStack from "./src/navigation/StackNav";
 import { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import { useFonts } from "expo-font";
@@ -60,7 +60,7 @@ export default function App() {
   // App view
   return (
     <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <TabNavigation />
+      <HomeStack />
     </View>
   );
 }
