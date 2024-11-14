@@ -1,4 +1,9 @@
-import { initializeApp, getApp, getApps } from "firebase/app";
+import { initializeApp, getApp, getApps, } from "firebase/app";
+import {getAuth, initializeAuth } from 'firebase/auth';
+import { getReactNativePersistence } from '@firebase/auth/dist/rn/index.js';
+import { getFirestore } from "firebase/firestore";
+import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
+
 import {
   getStorage,
   ref,
@@ -30,6 +35,13 @@ if (getApps().length === 0) {
 
 const fbApp = getApp();
 const fbStorage = getStorage();
+const app =initializeApp(firebaseConfig)
+const db = getFirestore(app)
+
+// export const auth = initializeAuth(app, {
+//   persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+// });
+export const fireAuth = getAuth(app)
 
 const getPhotoUrl = async (imageName) => {
   const storage = getStorage();
@@ -73,4 +85,4 @@ const firebaseUpload = async (uri, name) => {
     );
   });
 };
-export { fbApp, fbStorage, firebaseUpload, getPhotoUrl };
+export { db,fbApp, fbStorage, firebaseUpload, getPhotoUrl };

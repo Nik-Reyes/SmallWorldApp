@@ -147,8 +147,8 @@ export default function HomeScreen() {
         <Button label="Camera Roll" type="identify" onPress={pickPhotoAsync} />
       </View>
 
-      <View>
-        <TouchableOpacity onPress={()=> navigation.navigate('LoginScreen')}>
+      <View style={styles.plantIdentify}>
+        <TouchableOpacity  onPress={()=> navigation.navigate('LoginScreen')}>
             <Text>
                 Community
             </Text>
