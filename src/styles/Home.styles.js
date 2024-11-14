@@ -16,7 +16,8 @@ export const styles = StyleSheet.create({
 
   titleText: {
     fontSize: 24,
-    fontFamily: "Prata",
+    // fontFamily: "Prata",
+    fontWeight: "700",
   },
 
   terrariumButtonContainer: {
@@ -29,9 +30,10 @@ export const styles = StyleSheet.create({
   },
 
   cameraText: {
-    fontFamily: "Prompt_Regular",
+    // fontFamily: "Prompt_Regular",
     color: "black",
     fontSize: 20,
+    fontWeight: "500",
   },
 
   cameraButtonContainer: {
@@ -45,16 +47,10 @@ export const styles = StyleSheet.create({
   libraryText: {
     textAlign: "center",
     width: "100%",
-    fontFamily: "Prompt_light",
+    // fontFamily: "Prompt_Light",
     color: "black",
     backgroundColor: "white",
-  },
-
-  toolButtonContainer: {
-    flex: 1,
-    flexDirection: "row",
-    gap: 5,
-    justifyContent: "space-between",
+    fontWeight: "bold",
   },
 
   identifyButtonContainer: {
@@ -89,7 +85,7 @@ export const styles = StyleSheet.create({
     borderLeftWidth: 3,
   },
 
-  toolButton: {
+  shadowContainer: {
     width: "32%",
     height: "100%",
     shadowColor: "grey",
@@ -99,10 +95,57 @@ export const styles = StyleSheet.create({
     elevation: 10,
   },
 
+  toolButtonContainer: {
+    flex: 1,
+    flexDirection: "row",
+    gap: 5,
+    justifyContent: "space-between",
+  },
+
+  toolButton: {
+    width: "100%",
+    height: "100%",
+    backgroundColor: "white",
+    borderRadius: 24,
+    overflow: "hidden",
+  },
+
+  toolButtonItems: {
+    flex: 1,
+    position: "relative",
+  },
+
+  toolImageContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: "71%",
+  },
+
+  toolButtonImage: {
+    width: "100%",
+    height: "100%",
+    // backgroundColor: "red",
+  },
+
+  toolButtonBadge: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    width: "100%",
+    height: "30%",
+    borderTopLeftRadius: 15.85,
+    borderTopRightRadius: 15.85,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
   buttonLabel: {
     color: "white",
-    fontSize: 16,
-    fontFamily: "Prompt_Light",
+    fontSize: 14,
+    // fontFamily: "Prompt_Light",
+    fontWeight: "bold",
   },
 
   imageButtonLabel: {
@@ -128,20 +171,6 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
 
-  buttonBadge: {
-    position: "absolute",
-    top: 0,
-    // need to differentiate "right" between android and ios
-    // because android needs "right: -0.05"
-    right: 0,
-    width: "58%",
-    height: "30%",
-    borderBottomLeftRadius: 15.85,
-    borderBottomRightRadius: 0,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
   enterBadge: {
     position: "absolute",
     bottom: -0.2,
@@ -151,19 +180,25 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: 24,
     alignItems: "center",
     justifyContent: "center",
-    opacity: 0.9,
+    opacity: 0.94,
   },
 
   image: {
+    height: "100%",
+    width: "100%",
+    opacity: 0.4,
+  },
+
+  header: {
     height: 200,
-    top: -20,
+    top: 0,
     position: "absolute",
     width: "100%",
+    overflow: "hidden",
   },
 
   imageOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(255, 255, 255, 0)",
   },
 
   container: {
@@ -186,8 +221,9 @@ export const styles = StyleSheet.create({
   },
 
   subtitle: {
-    fontFamily: "Prompt_Light",
+    // fontFamily: "Prompt_Light",
     fontSize: 12,
-    paddingRight: 3,
+    // paddingRight: 3,
+    fontWeight: "300",
   },
 });

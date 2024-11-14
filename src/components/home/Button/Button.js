@@ -35,7 +35,7 @@ export default function Button({ label, onPress, imgSrc, text }) {
           source={imgSrc}
           style={styles.cameraLibraryImage}
           imageStyle={{
-            resizeMode: "fill",
+            resizeMode: "stretch",
             borderTopRightRadius: 24,
             borderBottomRightRadius: 24,
           }}
@@ -63,16 +63,24 @@ export default function Button({ label, onPress, imgSrc, text }) {
   }
 
   return (
-    <Pressable style={styles.toolButton} onPress={() => onPress()}>
-      <ImageBackground
-        source={imgSrc}
-        style={styles.buttonImage}
-        imageStyle={{ borderRadius: 24 }}
-      >
-        <View style={[styles.buttonBadge, { backgroundColor: badgeColor }]}>
+    <View style={styles.shadowContainer}>
+      <Pressable style={styles.toolButton} onPress={() => onPress()}>
+        <View style={styles.toolButtonItems}>
+          <View style={styles.toolImageContainer}>
+            <ImageBackground
+              source={imgSrc}
+              style={styles.toolButtonImage}
+              imageStyle={{
+                opacity: 0.5,
+              }}
+            />
+          </View>
+        </View>
+
+        <View style={[styles.toolButtonBadge, { backgroundColor: badgeColor }]}>
           <Text style={styles.buttonLabel}>{label}</Text>
         </View>
-      </ImageBackground>
-    </Pressable>
+      </Pressable>
+    </View>
   );
 }

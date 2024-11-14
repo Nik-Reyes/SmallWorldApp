@@ -1,7 +1,7 @@
 // React, React Native, & Expo Imports
 import HomeStack from "./src/navigation/StackNav";
 import { useCallback, useEffect, useState } from "react";
-import { View } from "react-native";
+import { View, SafeAreaView } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { Asset } from "expo-asset";
@@ -44,7 +44,7 @@ export default function App() {
       }
     }
     prepareImages();
-  }, []); // Run only once on mount
+  }, []);
 
   // Effect to hide the splash screen when everything is ready
   const onLayoutRootView = useCallback(async () => {

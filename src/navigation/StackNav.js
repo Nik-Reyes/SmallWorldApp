@@ -12,7 +12,7 @@ export default function HomeStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={TabNav} />
+        <Stack.Screen name="Main" component={TabNav} />
         <Stack.Screen name="Explore" component={Explore} />
         <Stack.Screen name="Learn" component={Learn} />
         <Stack.Screen name="Care" component={Care} />

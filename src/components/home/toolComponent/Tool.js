@@ -4,9 +4,9 @@ import { styles } from "../../../styles/Home.styles";
 import { dynamicContainerStyles } from "../../../hooks/buttonDimensions";
 import { useNavigation } from "@react-navigation/native";
 
-const exploreImage = require("../../../../assets/images/explore.jpg");
-const learnImage = require("../../../../assets/images/learn.jpg");
-const careImage = require("../../../../assets/images/Care.jpg");
+const exploreImage = require("../../../../assets/images/explore.1.png");
+const learnImage = require("../../../../assets/images/Learn.png");
+const careImage = require("../../../../assets/images/Care.png");
 
 export default function ToolComponent() {
   const dynamicContainer = dynamicContainerStyles();

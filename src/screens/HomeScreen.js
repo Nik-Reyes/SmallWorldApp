@@ -1,6 +1,6 @@
 // React, React Native, & Expo Imports
 import { StatusBar } from "expo-status-bar";
-import { View, SafeAreaView } from "react-native";
+import { View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 // Custom Component Imports
@@ -20,10 +20,10 @@ export default function HomeScreen() {
       }}
     >
       <LinearGradient
-        colors={["#f0fdf1", "whitesmoke", "#f0fdf2"]}
-        start={{ x: 0.5, y: 1 }}
-        end={{ x: 0, y: 0 }}
-        locations={[0.01, 0.4, 0.8]}
+        colors={["#f0fdf1", "#dff3eb"]}
+        start={{ x: 0, y: 0.4 }}
+        end={{ x: 0, y: 1 }}
+        locations={[0, 0.5]}
         style={{ flex: 1, position: "absolute", width: "100%", height: "100%" }}
       />
 
@@ -34,7 +34,8 @@ export default function HomeScreen() {
       <Identify />
 
       <ToolComponent />
-      <StatusBar />
+
+      <StatusBar hidden={false} style="dark" />
     </View>
   );
 }
