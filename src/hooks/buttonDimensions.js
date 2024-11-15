@@ -3,6 +3,7 @@ import { useWindowDimensions } from "react-native";
 const dynamicButtonDimensions = {
   terrarium: { pWidth: 0.934, pHeight: 0.26 },
   identify: { pWidth: 0.934, pHeight: 0.14 },
+  header: { pwidth: 0.934, pHeight: 0.1 },
   tools: { pWidth: 0.934, pHeight: 0.19 },
 };
 

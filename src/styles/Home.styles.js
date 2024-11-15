@@ -226,4 +226,19 @@ export const styles = StyleSheet.create({
     // paddingRight: 3,
     fontWeight: "300",
   },
+
+  searchInput: {
+    height: 40,
+    width: "70%",
+  },
+  headerContainer: {
+    width: "93.4%",
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginTop: -45,
+    marginBottom: -10,
+
+    justifyContent: "center",
+    // backgroundColor: "red",
+  },
 });
