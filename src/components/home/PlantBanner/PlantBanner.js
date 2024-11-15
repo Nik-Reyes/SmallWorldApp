@@ -14,9 +14,9 @@ export default function PlantBanner() {
       >
         <LinearGradient
           colors={[
-            "rgba(240,253,242, 1)",
-            "rgba(240,253,242, 0.6)",
-            "rgba(240,253,242, 0)",
+            "rgba(232,245,233, 1)",
+            "rgba(232,245,233, 0.6)",
+            "rgba(232,245,233, 0)",
           ]}
           start={{ x: 0.5, y: 1 }}
           end={{ x: 0.5, y: 0 }}
