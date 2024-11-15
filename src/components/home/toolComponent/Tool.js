@@ -18,7 +18,7 @@ export default function ToolComponent() {
         <Text style={styles.titleText}>Your Tools</Text>
       </View>
 
-      <View style={styles.toolButtonContainer}>
+      <View style={[styles.toolButtonContainer]}>
         <Button
           label="Explore"
           onPress={() => navigation.getParent()?.navigate("Explore")}

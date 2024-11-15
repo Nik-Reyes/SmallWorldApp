@@ -30,11 +30,7 @@ export default function IdentifyComponent() {
       </View>
       <View style={styles.identifyButtonContainer}>
         <Button label="camera" onPress={handleCameraButton} />
-        <Button
-          label="library"
-          onPress={handleLibraryButton}
-          imgSrc={libraryImage}
-        />
+        <Button label="library" onPress={handleLibraryButton} />
       </View>
     </View>
   );

@@ -11,88 +11,23 @@ export const styles = StyleSheet.create({
     height: 30,
     width: "100%",
     justifyContent: "center",
-    marginBottom: 2,
+    marginBottom: 16,
   },
 
   titleText: {
     fontSize: 24,
-    // fontFamily: "Prata",
     fontWeight: "700",
+    color: "#014421",
   },
 
   terrariumButtonContainer: {
     flex: 1,
-    shadowColor: "grey",
+    shadowColor: "#BDBDBD",
     shadowOffset: { width: 0, height: 3.5 },
-    shadowOpacity: 0.7,
-    shadowRadius: 3,
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
     elevation: 10,
-  },
-
-  cameraText: {
-    // fontFamily: "Prompt_Regular",
-    color: "black",
-    fontSize: 20,
-    fontWeight: "500",
-  },
-
-  cameraButtonContainer: {
-    flex: 1,
-    width: "100%",
-    height: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  libraryText: {
-    textAlign: "center",
-    width: "100%",
-    // fontFamily: "Prompt_Light",
-    color: "black",
-    backgroundColor: "white",
-    fontWeight: "bold",
-  },
-
-  identifyButtonContainer: {
-    flex: 1,
-    backgroundColor: "white",
-    flexDirection: "row",
-    borderRadius: 24,
-    shadowColor: "grey",
-    shadowOffset: { width: 0, height: 3.5 },
-    shadowOpacity: 0.7,
-    shadowRadius: 3,
-    elevation: 10,
-  },
-
-  identifyButton: {
-    width: "40%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    borderTopLeftRadius: 24,
-    borderBottomLeftRadius: 24,
-  },
-
-  libraryButton: {
-    width: "60%",
-    height: "100%",
-    backgroundColor: "darkolivegreen",
-    alignItems: "center",
-    justifyContent: "center",
-    borderTopRightRadius: 24,
-    borderBottomRightRadius: 24,
-    borderLeftWidth: 3,
-  },
-
-  shadowContainer: {
-    width: "32%",
-    height: "100%",
-    shadowColor: "grey",
-    shadowOffset: { width: 0, height: 3.5 },
-    shadowOpacity: 0.7,
-    shadowRadius: 3,
-    elevation: 10,
+    borderRadius: 30,
   },
 
   toolButtonContainer: {
@@ -104,10 +39,12 @@ export const styles = StyleSheet.create({
 
   toolButton: {
     width: "100%",
-    height: "100%",
+    height: "40%",
     backgroundColor: "white",
-    borderRadius: 24,
+    borderRadius: 30,
     overflow: "hidden",
+    justifyContent: "center",
+    alignItems: "center",
   },
 
   toolButtonItems: {
@@ -135,21 +72,83 @@ export const styles = StyleSheet.create({
     right: 0,
     width: "100%",
     height: "30%",
-    borderTopLeftRadius: 15.85,
-    borderTopRightRadius: 15.85,
     alignItems: "center",
     justifyContent: "center",
   },
 
+  cameraText: {
+    color: "#424242",
+    fontSize: 20,
+    fontWeight: "500",
+  },
+
+  cameraButtonContainer: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  libraryButton: {
+    width: "48%",
+    height: "100%",
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 30,
+    shadowColor: "#BDBDBD",
+    shadowOffset: { width: 0, height: 3.5 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    elevation: 10,
+  },
+
+  libraryText: {
+    textAlign: "center",
+    width: "100%",
+    color: "#424242",
+    backgroundColor: "white",
+  },
+
+  identifyButtonContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  identifyButton: {
+    width: "48%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 30,
+    backgroundColor: "white",
+    shadowColor: "#BDBDBD",
+    shadowOffset: { width: 0, height: 3.5 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    elevation: 10,
+  },
+
+  shadowContainer: {
+    width: "32%",
+    height: "100%",
+    shadowColor: "#BDBDBD",
+    shadowOffset: { width: 0, height: 3.5 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+    elevation: 10,
+  },
+
   buttonLabel: {
-    color: "white",
-    fontSize: 14,
-    // fontFamily: "Prompt_Light",
-    fontWeight: "bold",
+    color: "#424242",
+    fontSize: 18,
+    fontWeight: "500",
   },
 
   imageButtonLabel: {
-    color: "whitesmoke",
+    color: "white",
   },
 
   buttonImage: {
@@ -162,25 +161,16 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
 
-  cameraLibraryImage: {
-    resizeMode: "contain",
-    height: "100%",
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    flex: 1,
-  },
-
   enterBadge: {
     position: "absolute",
     bottom: -0.2,
     width: "100%",
-    height: "22.8%",
-    borderBottomLeftRadius: 24,
-    borderBottomRightRadius: 24,
+    height: "30%",
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
     alignItems: "center",
     justifyContent: "center",
-    opacity: 0.94,
+    opacity: 0.9,
   },
 
   image: {
@@ -202,7 +192,7 @@ export const styles = StyleSheet.create({
   },
 
   container: {
-    flex: 1, //grows gorizontally and vertically to fill the free space (entire screen in this case)
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -221,14 +211,13 @@ export const styles = StyleSheet.create({
   },
 
   subtitle: {
-    // fontFamily: "Prompt_Light",
     fontSize: 12,
-    // paddingRight: 3,
     fontWeight: "300",
+    color: "#616161",
   },
 
   searchInput: {
-    height: 40,
+    height: 50,
     width: "70%",
   },
   headerContainer: {

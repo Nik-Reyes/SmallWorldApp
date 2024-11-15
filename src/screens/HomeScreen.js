@@ -22,10 +22,10 @@ export default function HomeScreen() {
         }}
       >
         <LinearGradient
-          colors={["#f0fdf1", "#dff3eb"]}
-          start={{ x: 0, y: 0.4 }}
+          colors={["#E8F5E9", "#ebf7f4", "#d2ede5"]}
+          start={{ x: 0.5, y: 0.4 }}
           end={{ x: 0, y: 1 }}
-          locations={[0, 0.5]}
+          locations={[0, 0.3, 0.8]}
           style={{
             flex: 1,
             position: "absolute",

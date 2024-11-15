@@ -1,6 +1,7 @@
 export const badgeColorList = {
-  Learn: "#5C9CB4",
-  Explore: "#CC7734",
-  Care: "#CC8890",
-  Terrarium: "#a8c58d",
+  Learn: "#3ba44f",
+  Explore: "#3ba44f",
+  Care: "#3ba44f",
+  Terrarium: "black",
+  searchOutline: "#66BB6A",
 };
