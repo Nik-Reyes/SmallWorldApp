@@ -1,9 +1,10 @@
 import React from "react";
-import { View, Pressable, Text, ImageBackground } from "react-native";
+import { View, Pressable, Text, ImageBackground, Image } from "react-native";
 import { badgeColorList } from "../../../styles/colors";
 import { styles } from "../../../styles/Home.styles";
+import { FontAwesome, FontAwesome6, Ionicons } from "@expo/vector-icons";
 
-export default function Button({ label, onPress, imgSrc, text }) {
+export default function Button({ label, onPress, imgSrc }) {
   const assignBadgeColor = (label) => {
     switch (label) {
       case "Learn":
@@ -17,7 +18,40 @@ export default function Button({ label, onPress, imgSrc, text }) {
     }
   };
 
+  const assignIcon = (label) => {
+    switch (label) {
+      case "Learn":
+        return (
+          <Ionicons
+            name="bulb"
+            size={23}
+            color="#253b35"
+            style={{ marginRight: 1 }}
+          />
+        );
+      case "Explore":
+        return (
+          <FontAwesome
+            name="map-marker"
+            size={24}
+            color="#253b35"
+            style={{ marginRight: 4 }}
+          />
+        );
+      case "Care":
+        return (
+          <FontAwesome6
+            name="trowel"
+            size={21}
+            color="#253b35"
+            style={{ marginRight: 4 }}
+          />
+        );
+    }
+  };
+
   const badgeColor = assignBadgeColor(label);
+  const iconType = assignIcon(label);
 
   if (label === "camera") {
     return (
@@ -31,17 +65,10 @@ export default function Button({ label, onPress, imgSrc, text }) {
   } else if (label === "library") {
     return (
       <Pressable style={styles.libraryButton} onPress={onPress}>
-        <ImageBackground
-          source={imgSrc}
-          style={styles.cameraLibraryImage}
-          imageStyle={{
-            resizeMode: "stretch",
-            borderTopRightRadius: 30,
-            borderBottomRightRadius: 30,
-          }}
-        >
-          <Text style={styles.libraryText}> Select From Library </Text>
-        </ImageBackground>
+        <View style={styles.cameraButtonContainer}>
+          <Text style={styles.cameraText}>Camera Roll</Text>
+          <Text style={styles.subtitle}> Select a photo</Text>
+        </View>
       </Pressable>
     );
   } else if (label === "Terrarium") {
@@ -65,6 +92,7 @@ export default function Button({ label, onPress, imgSrc, text }) {
   return (
     <View style={styles.shadowContainer}>
       <Pressable style={styles.toolButton} onPress={() => onPress()}>
+        {iconType}
         <Text style={styles.buttonLabel}>{label}</Text>
       </Pressable>
     </View>

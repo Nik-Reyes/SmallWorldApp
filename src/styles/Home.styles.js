@@ -22,10 +22,10 @@ export const styles = StyleSheet.create({
 
   terrariumButtonContainer: {
     flex: 1,
-    shadowColor: "#BDBDBD",
+    shadowColor: "#253b35",
     shadowOffset: { width: 0, height: 3.5 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
+    shadowOpacity: 0.3,
+    shadowRadius: 7,
     elevation: 10,
     borderRadius: 30,
   },
@@ -39,10 +39,10 @@ export const styles = StyleSheet.create({
 
   toolButton: {
     width: "100%",
-    height: "40%",
-    backgroundColor: "white",
+    height: "100%",
+    backgroundColor: "#fcfefd",
     borderRadius: 30,
-    overflow: "hidden",
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -93,14 +93,14 @@ export const styles = StyleSheet.create({
   libraryButton: {
     width: "48%",
     height: "100%",
-    backgroundColor: "white",
+    backgroundColor: "#fcfefd",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
-    shadowColor: "#BDBDBD",
+    shadowColor: "#354b45",
     shadowOffset: { width: 0, height: 3.5 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
+    shadowOpacity: 0.3,
+    shadowRadius: 7,
     elevation: 10,
   },
 
@@ -108,7 +108,8 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     width: "100%",
     color: "#424242",
-    backgroundColor: "white",
+    position: "absolute",
+    zIndex: 1,
   },
 
   identifyButtonContainer: {
@@ -123,21 +124,21 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 30,
-    backgroundColor: "white",
-    shadowColor: "#BDBDBD",
+    backgroundColor: "#fcfefd",
+    shadowColor: "#354b45",
     shadowOffset: { width: 0, height: 3.5 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
+    shadowOpacity: 0.3,
+    shadowRadius: 7,
     elevation: 10,
   },
 
   shadowContainer: {
     width: "32%",
     height: "100%",
-    shadowColor: "#BDBDBD",
+    shadowColor: "#354b45",
     shadowOffset: { width: 0, height: 3.5 },
-    shadowOpacity: 0.8,
-    shadowRadius: 4,
+    shadowOpacity: 0.3,
+    shadowRadius: 7,
     elevation: 10,
   },
 
@@ -219,6 +220,7 @@ export const styles = StyleSheet.create({
   searchInput: {
     height: 50,
     width: "70%",
+    backgroundColor: "#fcfefd",
   },
   headerContainer: {
     width: "93.4%",

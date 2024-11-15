@@ -5,7 +5,8 @@ import { dynamicContainerStyles } from "../../../hooks/buttonDimensions";
 import { useCamera } from "../../../hooks/takePicture.js";
 import { useLibrary } from "../../../hooks/selectPicture.js";
 
-const libraryImage = require("../../../../assets/images/negative.webp");
+const cameraImage = require("../../../../assets/images/1.png");
+const libraryImage = require("../../../../assets/images/2.png");
 
 export default function IdentifyComponent() {
   const dynamicContainer = dynamicContainerStyles();
@@ -29,8 +30,16 @@ export default function IdentifyComponent() {
         <Text style={styles.titleText}>Identify a Plant</Text>
       </View>
       <View style={styles.identifyButtonContainer}>
-        <Button label="camera" onPress={handleCameraButton} />
-        <Button label="library" onPress={handleLibraryButton} />
+        <Button
+          label="camera"
+          onPress={handleCameraButton}
+          imgSrc={cameraImage}
+        />
+        <Button
+          label="library"
+          onPress={handleLibraryButton}
+          imgSrc={libraryImage}
+        />
       </View>
     </View>
   );

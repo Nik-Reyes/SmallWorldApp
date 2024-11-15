@@ -25,7 +25,7 @@ export default function TabNav() {
         },
 
         headerShown: false,
-        tabBarActiveTintColor: "#76B947",
+        tabBarActiveTintColor: "#197f4d",
         tabBarInactiveTintColor: "grey",
       }}
     >
