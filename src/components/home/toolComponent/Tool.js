@@ -4,10 +4,6 @@ import { styles } from "../../../styles/Home.styles";
 import { dynamicContainerStyles } from "../../../hooks/buttonDimensions";
 import { useNavigation } from "@react-navigation/native";
 
-const exploreImage = require("../../../../assets/images/explore.1.png");
-const learnImage = require("../../../../assets/images/Learn.png");
-const careImage = require("../../../../assets/images/Care.png");
-
 export default function ToolComponent() {
   const dynamicContainer = dynamicContainerStyles();
   const navigation = useNavigation();
@@ -22,22 +18,16 @@ export default function ToolComponent() {
         <Button
           label="Explore"
           onPress={() => navigation.getParent()?.navigate("Explore")}
-          text="button"
-          imgSrc={exploreImage}
         />
 
         <Button
           label="Learn"
           onPress={() => navigation.getParent()?.navigate("Learn")}
-          text="button"
-          imgSrc={learnImage}
         />
 
         <Button
           label="Care"
           onPress={() => navigation.getParent()?.navigate("Care")}
-          text="button"
-          imgSrc={careImage}
         />
       </View>
     </View>

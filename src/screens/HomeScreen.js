@@ -1,7 +1,7 @@
 // React, React Native, & Expo Imports
 import { View, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useWindowDimensions, StatusBar, Text } from "react-native";
+import { useWindowDimensions, StatusBar } from "react-native";
 
 // Custom Component Imports
 import ToolComponent from "../components/home/toolComponent/Tool";
