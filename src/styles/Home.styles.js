@@ -216,9 +216,10 @@ export const styles = StyleSheet.create({
   },
 
   searchInput: {
-    height: 50,
+    height: 45,
     width: "70%",
     backgroundColor: "#fcfefd",
+    marginBottom: -15,
   },
   headerContainer: {
     width: "93.4%",

@@ -1,13 +1,7 @@
 // React, React Native, & Expo Imports
-import {
-  View,
-  TouchableWithoutFeedback,
-  Keyboard,
-  ScrollView,
-} from "react-native";
+import { View, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useWindowDimensions, StatusBar, Text } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 // Custom Component Imports
 import ToolComponent from "../components/home/toolComponent/Tool";
@@ -34,7 +28,7 @@ export default function HomeScreen() {
       <ScrollView
         contentContainerStyle={{
           width: width,
-          paddingTop: 100,
+          paddingTop: 70,
           paddingBottom: 100,
           alignSelf: "center",
         }}
