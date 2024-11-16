@@ -1,9 +1,9 @@
 import { useWindowDimensions } from "react-native";
 
 const dynamicButtonDimensions = {
-  terrarium: { pWidth: 0.89, pHeight: 0.27 },
-  identify: { pWidth: 0.89, pHeight: 0.25 },
-  tools: { pWidth: 0.89, pHeight: 0.11 },
+  terrarium: { pWidth: 0.89, pHeight: 0.29 },
+  identify: { pWidth: 0.89, pHeight: 0.275 },
+  tools: { pWidth: 0.89, pHeight: 0.123 },
 };
 
 export const dynamicContainerStyles = () => {

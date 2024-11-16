@@ -20,7 +20,6 @@ export default function Search() {
       style={styles.searchInput}
       theme={{
         colors: {
-          background: "white",
           primary: "#76B947",
         },
         roundness: 30,

@@ -8,10 +8,9 @@ export const styles = StyleSheet.create({
   },
 
   titleContainer: {
-    height: 30,
+    height: 60,
     width: "100%",
     justifyContent: "center",
-    marginBottom: 16,
   },
 
   titleText: {
@@ -199,7 +198,6 @@ export const styles = StyleSheet.create({
   },
 
   terrarium: {
-    paddingTop: 90,
     flex: 1 / 3,
     bottom: 0,
   },
@@ -224,12 +222,6 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     width: "93.4%",
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginTop: -45,
-    marginBottom: -10,
-
     justifyContent: "center",
-    // backgroundColor: "red",
   },
 });
