@@ -12,6 +12,8 @@ import {
   FIREBASE_PROJECT_ID,
   FIREBASE_AUTH_DOMAIN,
 } from "@env";
+import { getFirestore } from "firebase/firestore";
+import {getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -29,6 +31,9 @@ if (getApps().length === 0) {
 
 const fbApp = getApp();
 const fbStorage = getStorage();
+const app =initializeApp(firebaseConfig)
+const db = getFirestore(app)
+const fireAuth = getAuth(app)
 
 export const getPhotoUrl = async (imageName) => {
   const storage = getStorage();
@@ -72,4 +77,4 @@ export const firebaseUpload = async (uri, name) => {
     );
   });
 };
-export { fbApp, fbStorage };
+export { fbApp, fbStorage, db, fireAuth };

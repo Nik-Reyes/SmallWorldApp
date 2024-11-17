@@ -22,9 +22,9 @@ export default function App() {
         const assetImages = Images.map((image) => {
           if (typeof image === "number") {
             console.log("image", image);
-            return Asset.fromModule(image).downloadAsync();
+            return Asset?.fromModule(image)?.downloadAsync();
           }
-          return Asset.fromURI(image).downloadAsync();
+          return Asset?.fromURI(image)?.downloadAsync();
         });
         await Promise.all(assetImages);
         console.log("All images processed");
