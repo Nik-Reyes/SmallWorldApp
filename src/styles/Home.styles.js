@@ -191,41 +191,22 @@ export const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
   },
 
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  terrarium: {
-    flex: 1 / 3,
-    bottom: 0,
-  },
-
-  plantIdentify: {
-    flex: 1 / 3,
-    alignItems: "center",
-    bottom: 0,
-    flexDirection: "row",
-  },
-
   subtitle: {
     fontSize: 12,
     fontWeight: "300",
     color: "#616161",
   },
   searchInput: {
-    backgroundColor: "#fcfefd",
-    marginBottom: -15,
-    shadowColor: "#253b35",
+    // backgroundColor: "red",
     shadowOffset: { width: 0, height: 3.5 },
     shadowOpacity: 0.3,
     shadowRadius: 7,
     elevation: 10,
+    width: "70%",
   },
   headerContainer: {
-    width: "92%",
-    justifyContent: "center",
+    width: "89%",
+    justifyContent: "space-between",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
