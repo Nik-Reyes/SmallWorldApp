@@ -220,6 +220,11 @@ export const styles = StyleSheet.create({
     width: "70%",
     backgroundColor: "#fcfefd",
     marginBottom: -15,
+    shadowColor: "#253b35",
+    shadowOffset: { width: 0, height: 3.5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 7,
+    elevation: 10,
   },
   headerContainer: {
     width: "93.4%",
