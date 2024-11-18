@@ -5,6 +5,16 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { 
+  initializeAuth,
+  getReactNativePersistence,
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut
+} from "firebase/auth";
+import { 
+  getFirestore 
+} from "firebase/firestore";
 import {
   FIREBASE_API_KEY,
   FIREBASE_STORAGE_BUCKET,
@@ -12,6 +22,7 @@ import {
   FIREBASE_PROJECT_ID,
   FIREBASE_AUTH_DOMAIN,
 } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -23,12 +34,18 @@ const firebaseConfig = {
 
 // Known error where the initializeApp() tries to load app multiple time
 // load only when the app has not been initialised
+
 if (getApps().length === 0) {
   initializeApp(firebaseConfig);
+  
 }
 
 const fbApp = getApp();
 const fbStorage = getStorage();
+const fbFireStore = getFirestore(fbApp);
+const fbAuth = initializeAuth(fbApp, {
+  persistence: getReactNativePersistence(AsyncStorage)
+})
 
 export const getPhotoUrl = async (imageName) => {
   const storage = getStorage();
@@ -72,4 +89,10 @@ export const firebaseUpload = async (uri, name) => {
     );
   });
 };
-export { fbApp, fbStorage };
+
+export { 
+  fbApp, 
+  fbStorage, 
+  fbFireStore, 
+  fbAuth,
+};
