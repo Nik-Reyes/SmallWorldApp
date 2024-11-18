@@ -214,15 +214,15 @@ export const styles = StyleSheet.create({
     fontWeight: "300",
     color: "#616161",
   },
-
   searchInput: {
-    height: 45,
-    width: "70%",
+    flexGrow: 1,
     backgroundColor: "#fcfefd",
-    marginBottom: -15,
   },
   headerContainer: {
-    width: "93.4%",
+    width: "92%",
     justifyContent: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
 });

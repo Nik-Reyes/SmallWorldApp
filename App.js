@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { View, SafeAreaView } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { Asset } from "expo-asset";
+import { AuthProvider } from "./src/services/authContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -18,10 +19,10 @@ export default function App() {
   useEffect(() => {
     async function prepareImages() {
       try {
-        console.log("Prepping images...");
+        // console.log("Prepping images...");
         const assetImages = Images.map((image) => {
           if (typeof image === "number") {
-            console.log("image", image);
+            // console.log("image", image);
             return Asset.fromModule(image).downloadAsync();
           }
           return Asset.fromURI(image).downloadAsync();
@@ -38,7 +39,12 @@ export default function App() {
 
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
-      await SplashScreen.hideAsync();
+      try {
+        await SplashScreen.hideAsync();
+      } catch (error) {
+        console.warn("Error hiding splash screen")
+      }
+      
     }
   }, [appIsReady]);
 
@@ -48,8 +54,10 @@ export default function App() {
 
   // App view
   return (
-    <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <HomeStack />
-    </View>
+    <AuthProvider>
+      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+        <HomeStack />
+      </View>
+    </AuthProvider>
   );
 }
