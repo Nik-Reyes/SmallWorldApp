@@ -1,9 +1,9 @@
 // React, React Native, & Expo Imports
-import { StatusBar } from "expo-status-bar";
+import HomeStack from "./src/navigation/StackNav";
 import { useCallback, useEffect, useState } from "react";
-import { StyleSheet, View, Linking, Platform, Alert } from "react-native";
-import * as ImagePicker from "expo-image-picker";
+import { View, SafeAreaView } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
+<<<<<<< HEAD
 import { fbApp, firebaseUpload, getPhotoUrl } from "./firebaseConfig";
 import { callPlantApi, processImage } from './plant-recognition';
 import * as FileSystem from "expo-file-system"
@@ -11,46 +11,58 @@ import * as FileSystem from "expo-file-system"
 // Custom Component Imports
 import Button from "./components/Button";
 import { list } from "firebase/storage";
+=======
+import { Asset } from "expo-asset";
+import { AuthProvider } from "./src/services/authContext";
+>>>>>>> main
 
 SplashScreen.preventAutoHideAsync();
 
+const Images = [
+  require("./assets/images/TopComponent.png"),
+  require("./assets/images/garden.png"),
+];
+
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-  const [cameraPermission, setCameraPermission] =
-    ImagePicker.useCameraPermissions();
-  const [libraryPermission, setLibraryPermission] =
-    ImagePicker.useMediaLibraryPermissions();
-  const [files, setFiles] = useState([]);
 
   useEffect(() => {
-    async function prepare() {
+    async function prepareImages() {
       try {
-        // This is where we will load any fonts and make any Necessary on-boot
-        // API calls. The fonts and API calls are loaded/made AND only then will
-        // the setTimeout begin
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        // console.log("Prepping images...");
+        const assetImages = Images.map((image) => {
+          if (typeof image === "number") {
+            // console.log("image", image);
+            return Asset.fromModule(image).downloadAsync();
+          }
+          return Asset.fromURI(image).downloadAsync();
+        });
+        await Promise.all(assetImages);
+        console.log("All images processed");
+        setAppIsReady(true);
       } catch (e) {
         console.warn(e);
-      } finally {
-        // Once all "on-app-boot" loading is completed, change setAppIsReady to true
-        // so that the onLayoutRootView callback can hide the splash screen
-        setAppIsReady(true);
       }
     }
-    prepare();
+    prepareImages();
   }, []);
 
-  // Hide the splash screen
   const onLayoutRootView = useCallback(async () => {
     if (appIsReady) {
-      await SplashScreen.hideAsync();
+      try {
+        await SplashScreen.hideAsync();
+      } catch (error) {
+        console.warn("Error hiding splash screen")
+      }
+      
     }
   }, [appIsReady]);
 
   if (!appIsReady) {
-    return null;
+    return null; // Render nothing until ready
   }
 
+<<<<<<< HEAD
   // Checking if the user will allow the app to access the camera roll
   const pickPhotoAsync = async () => {
     // Check first if the user has granted permissions, and do not proceed until they have
@@ -158,56 +170,14 @@ export default function App() {
     }
   };
 
+=======
+>>>>>>> main
   // App view
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      {/* Async function to choose a photo from the camera roll */}
-      <View style={styles.terrarium}>
-        <Button label="Terrarium" type="terrarium" />
+    <AuthProvider>
+      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+        <HomeStack />
       </View>
-
-      <View style={styles.plantIdentify}>
-        <Button label="Identify" type="identify" onPress={takePhotoAsync} />
-        <Button label="Camera Roll" type="identify" onPress={pickPhotoAsync} />
-      </View>
-
-      <View style={styles.footerContainer}>
-        <Button label="Explore" />
-        <Button label="Learn" />
-        <Button label="Care" />
-      </View>
-
-      <StatusBar style="auto" />
-    </View>
+    </AuthProvider>
   );
 }
-
-//Styles
-const styles = StyleSheet.create({
-  container: {
-    flex: 1, //grows gorizontally and vertically to fill the free space (entire screen in this case)
-    backgroundColor: "#FFFFFA",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  terrarium: {
-    paddingTop: 90,
-    flex: 1 / 3,
-    bottom: 0,
-  },
-
-  footerContainer: {
-    flex: 1 / 5,
-    alignItems: "center",
-    bottom: 14,
-    flexDirection: "row",
-  },
-
-  plantIdentify: {
-    flex: 1 / 3,
-    alignItems: "center",
-    bottom: 0,
-    flexDirection: "row",
-  },
-});

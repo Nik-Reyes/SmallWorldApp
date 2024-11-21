@@ -12,10 +12,10 @@
     "slug": "SmallWorldProject",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/smallWorldIcon.png",
+    "icon": "./assets/images/smallWorldIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/smallWorldSplash.png",
+      "image": "./assets/images/smallWorldSplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -27,13 +27,17 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ],
       "package": "com.anonymous.SmallWorldProject"
+    },
+    "androidNavigationBar": {
+      "backgroundColor": "#00000000",
+      "visible": "immersive"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -46,6 +50,7 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
         }
       ],
+<<<<<<< HEAD
       [
         "expo-build-properties",
         {
@@ -54,6 +59,10 @@
           }
         }
       ]
+=======
+      "expo-font",
+      "expo-asset"
+>>>>>>> main
     ]
   }
 }
