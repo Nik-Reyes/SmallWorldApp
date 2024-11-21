@@ -33,7 +33,6 @@ const firebaseConfig = {
   apiKey: Config.FIREBASE_API_KEY,
   authDomain: Config.FIREBASE_AUTH_DOMAIN,
   projectId: Config.FIREBASE_PROJECT_ID,
-  // storageBucket: Config.FIREBASE_STORAGE_BUCKET,
   storageBucket: "smallworld-b093d.appspot.com",
 
   appId: Config.FIREBASE_APP_ID,
@@ -109,9 +108,10 @@ const firebaseUpload = async (imageUri, name) => {
       //If everything so far is good, then get the downloadUrl and finish the upload task
       async () => {
         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+        console.log("File available at:", downloadURL);
         resolve({
-          downloadURL,
-          metadata: uploadTask.snapshot.metadata,
+          downloadURL
+          // metadata: uploadTask.snapshot.metadata,
         });
       }
     );
