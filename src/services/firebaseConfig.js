@@ -8,8 +8,6 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-<<<<<<< HEAD:firebaseConfig.js
-=======
 import { 
   initializeAuth,
   getReactNativePersistence,
@@ -28,7 +26,6 @@ import {
   FIREBASE_AUTH_DOMAIN,
 } from "@env";
 import AsyncStorage from "@react-native-async-storage/async-storage";
->>>>>>> main:src/services/firebaseConfig.js
 
 // import {
 //   FIREBASE_API_KEY,
@@ -82,15 +79,8 @@ export const getPhotoUrl = async (imageName) => {
   return downloadUrl;
 };
 
-<<<<<<< HEAD:firebaseConfig.js
-// const firebaseUpload = async (uri, name) => 
-const firebaseUpload = async (imageUri, name) => {
-
-  console.log("config file fileName: " + name);
-=======
 export const firebaseUpload = async (uri, name) => {
   //console.log("config file fileName: " + name);
->>>>>>> main:src/services/firebaseConfig.js
   //get the URI
   const fetchResponse = await fetch(imageUri);
   //convert URI to a blob
@@ -154,4 +144,4 @@ export {
   fbStorage, 
   fbFireStore, 
   fbAuth,
-};
+}
