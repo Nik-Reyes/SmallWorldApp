@@ -1,13 +1,5 @@
 {
   "expo": {
-    "extra": {
-      "FIREBASE_API_KEY": "AIzaSyA2tgOXiRrY4_yuzvpR-doFUOrntVfQ5Rw",
-      "FIREBASE_AUTH_DOMAIN": "smallworld-b093d.firebaseapp.com",
-      "FIREBASE_PROJECT_ID": "smallworld-b093d",
-      "FIREBASE_STORAGE_BUCKET": "smallworld-b093d.appspot.com",
-      "FIREBASE_APP_ID": "1:771499224120:android:29181182d3d56675a9cacd",
-      "jsEngine": "hermes"
-    }, 
     "name": "SmallWorldProject",
     "slug": "SmallWorldProject",
     "version": "1.0.0",
@@ -29,11 +21,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ],
-      "package": "com.anonymous.SmallWorldProject"
+      }
     },
     "androidNavigationBar": {
       "backgroundColor": "#00000000",
@@ -50,19 +38,8 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
         }
       ],
-<<<<<<< HEAD
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "usesClearTextTraffic": true
-          }
-        }
-      ]
-=======
       "expo-font",
       "expo-asset"
->>>>>>> main
     ]
   }
 }
