@@ -50,7 +50,6 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
         }
       ],
-<<<<<<< HEAD
       [
         "expo-build-properties",
         {
@@ -58,11 +57,9 @@
             "usesClearTextTraffic": true
           }
         }
-      ]
-=======
+      ],
       "expo-font",
       "expo-asset"
->>>>>>> main
     ]
   }
 }

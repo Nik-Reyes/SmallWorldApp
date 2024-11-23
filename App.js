@@ -3,7 +3,6 @@ import HomeStack from "./src/navigation/StackNav";
 import { useCallback, useEffect, useState } from "react";
 import { View, SafeAreaView } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
-<<<<<<< HEAD
 import { fbApp, firebaseUpload, getPhotoUrl } from "./firebaseConfig";
 import { callPlantApi, processImage } from './plant-recognition';
 import * as FileSystem from "expo-file-system"
@@ -11,10 +10,8 @@ import * as FileSystem from "expo-file-system"
 // Custom Component Imports
 import Button from "./components/Button";
 import { list } from "firebase/storage";
-=======
 import { Asset } from "expo-asset";
 import { AuthProvider } from "./src/services/authContext";
->>>>>>> main
 
 SplashScreen.preventAutoHideAsync();
 
@@ -62,7 +59,6 @@ export default function App() {
     return null; // Render nothing until ready
   }
 
-<<<<<<< HEAD
   // Checking if the user will allow the app to access the camera roll
   const pickPhotoAsync = async () => {
     // Check first if the user has granted permissions, and do not proceed until they have
@@ -170,8 +166,6 @@ export default function App() {
     }
   };
 
-=======
->>>>>>> main
   // App view
   return (
     <AuthProvider>
