@@ -185,6 +185,7 @@ export const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     overflow: "hidden",
+    justifyContent: "center",
   },
 
   imageOverlay: {
@@ -196,19 +197,34 @@ export const styles = StyleSheet.create({
     fontWeight: "300",
     color: "#616161",
   },
-  searchInput: {
-    // backgroundColor: "red",
+
+  accountIcon: {
+    padding: 0,
+    margin: 0,
+    shadowColor: "black",
     shadowOffset: { width: 0, height: 3.5 },
     shadowOpacity: 0.3,
     shadowRadius: 7,
     elevation: 10,
-    width: "70%",
   },
+
+  searchInput: {
+    width: "70%",
+    height: 45,
+    justifyContent: "center",
+    shadowColor: "#253b35",
+    shadowOffset: { width: 0, height: 3.5 },
+    shadowOpacity: 0.3,
+    shadowRadius: 7,
+    elevation: 10,
+  },
+
   headerContainer: {
     width: "89%",
     justifyContent: "space-between",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    marginBottom: -15,
   },
 });

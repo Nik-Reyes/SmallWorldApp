@@ -9,7 +9,6 @@ export default function Search() {
     <TextInput
       left={<TextInput.Icon icon="magnify" color={() => "#253b35"} />}
       mode="outlined"
-      dense={true}
       value={text}
       onChangeText={onChangeText}
       placeholder="Find a plant"
