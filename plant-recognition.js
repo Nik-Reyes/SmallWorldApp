@@ -1,72 +1,82 @@
 import axios from 'axios';
-import { firebaseUpload } from './firebaseConfig';
-import Config from 'react-native-config';
-import { PLANTNET_API_KEY } from "@env";
+import { firebaseUpload } from "./src/services/firebaseConfig.js";
+import { PLANTNET_API_KEY } from "@env";  // Make sure the API key is correctly loaded from .env
+import * as FileSystem from "expo-file-system";
 
-
-const API_KEY = Config.PLANTNET_API_KEY || '2b10AYemxBmUt7qKBoWFpFq9u'; // Use .env or fallback
+// Define constants
+const API_KEY = PLANTNET_API_KEY || '2b10AYemxBmUt7qKBoWFpFq9u'; // Use .env or fallback
 const API_URL = `https://my-api.plantnet.org/v2/identify/all`;
 
-const callPlantApi = async (downloadURL, organ) => {
+// Function to download the image from Firebase URL to local file
+const downloadImage = async (url) => {
+  try {
+    const localUri = `${FileSystem.documentDirectory}${url.split('/').pop()}`;
+    console.log("Downloading image from URL:", url, "to local URI:", localUri);
+    await FileSystem.downloadAsync(url, localUri);
+    return localUri;
+  } catch (error) {
+    console.error("Error downloading image:", error);
+    throw error;  // Re-throw the error to be caught in the calling function
+  }
+}
 
-    //Making console logs to debug
-    console.log("Using API Key:", API_KEY);
-    console.log("Calling API URL:", API_URL);
+// Function to call PlantNet API
+const callPlantApi = async (downloadURL, organ) => {
+  try {
+    console.log("Calling PlantNet API with URL:", downloadURL);
+    // Download image locally from Firebase URL
+    const localUri = await downloadImage(downloadURL);
+    console.log("Downloaded image locally at:", localUri);
 
     const form = new FormData();
-
-    // Append organs and images to FormData
-    form.append('images', {
-        uri: downloadURL, // Firebase download URL
-        name: 'image.jpg', // File name
-        type: 'image/jpeg', // MIME type
+    form.append("images", {
+      uri: localUri,
+      name: "image.jpg",
+      type: "image/jpeg",
     });
-    form.append('organs', 'flower');  // We have to specify what type of prgan we are trying to idenify. In our case its flower
+    form.append("organs", organ || "flower");  // Default organ is 'flower'
 
-    // Debugging FormData
-    for (const [key, value] of form.entries()) {
-        console.log(`${key}: ${value}`);
+    // Make API call to PlantNet
+    const response = await axios.post(`${API_URL}?api-key=${API_KEY}`, form, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    // Process the response from the API
+    if (response.data && response.data.results) {
+      console.log("Identified plants:", response.data.results);
+      // You can process the results here, e.g., display or store the results
+    } else {
+      console.warn("No results from PlantNet API.");
     }
-
-    try {
-        //Make POST request
-        const { status, data } = await axios.post('https://my-api.plantnet.org/v2/identify/all', form, {
-            headers: {
-                "Authorization": `Bearer ${PLANTNET_API_KEY}`,
-                'Content-Type': 'multipart/form-data',
-            },
-          });
-
-        console.log('API Status:', status);
-        console.log('API Response:', JSON.stringify(data, null, 2));
-    } catch (error) {
-        if (axios.isAxiosError(error)) {
-            console.error('Axios Error:', error.response?.data || error.message);
-        } else {
-            console.error('Error calling API:', error);
-        }
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      console.error("Axios Error:", error.response?.data || error.message);
+    } else {
+      console.error("Error calling API:", error);
     }
+  }
 };
 
+// Function to process the image
 const processImage = async (imageUri, organ) => {
-    try {
-        console.log("Selected image URI:", imageUri);
-        const imageName = imageUri.split('/').pop();
+  try {
+    console.log("Processing image:", imageUri);
+    const imageName = imageUri.split("/").pop();
 
-        // Upload to Firebase
-        const { downloadURL } = await firebaseUpload(imageUri, imageName);
-
-        if (downloadURL) {
-            console.log("Image uploaded to Firebase. Download URL:", downloadURL);
-
-            // Call the PlantNet API with the Firebase URL and organ type
-            await callPlantApi(downloadURL, organ);
-        } else {
-            console.error("No download URL received.");
-        }
-    } catch (error) {
-        console.error("Error processing image:", error);
+    // Upload image to Firebase
+    const { downloadURL } = await firebaseUpload(imageUri, imageName);
+    if (downloadURL) {
+      console.log("Image uploaded successfully. Download URL:", downloadURL);
+      // Call PlantNet API with the download URL
+      await callPlantApi(downloadURL, organ);
+    } else {
+      console.error("No download URL received.");
     }
+  } catch (error) {
+    console.error("Error processing image:", error);
+  }
 };
 
 export { callPlantApi, processImage };

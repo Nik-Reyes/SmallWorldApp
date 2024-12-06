@@ -18,6 +18,7 @@ import {
 import { 
   getFirestore 
 } from "firebase/firestore";
+
 import {
   FIREBASE_API_KEY,
   FIREBASE_STORAGE_BUCKET,
@@ -25,6 +26,7 @@ import {
   FIREBASE_PROJECT_ID,
   FIREBASE_AUTH_DOMAIN,
 } from "@env";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // import {
@@ -39,21 +41,21 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const API_URL = 'https://my-api.plantnet.org/v2/identify/all?api-key=2b10b5BBeinjraYHuiW1SKcN';
 
 
-// const firebaseConfig = {
-//   apiKey: FIREBASE_API_KEY,
-//   storageBucket: FIREBASE_STORAGE_BUCKET,
-//   appId: FIREBASE_APP_ID,
-//   projectId: FIREBASE_PROJECT_ID,
-//   authDomain: FIREBASE_AUTH_DOMAIN,
-// };
 const firebaseConfig = {
-  apiKey: Config.FIREBASE_API_KEY,
-  authDomain: Config.FIREBASE_AUTH_DOMAIN,
-  projectId: Config.FIREBASE_PROJECT_ID,
-  storageBucket: "smallworld-b093d.appspot.com",
-
-  appId: Config.FIREBASE_APP_ID,
+  apiKey: FIREBASE_API_KEY,
+  authDomain: FIREBASE_AUTH_DOMAIN,
+  projectId: FIREBASE_PROJECT_ID,
+  storageBucket: FIREBASE_STORAGE_BUCKET,
+  appId: FIREBASE_APP_ID,
 };
+// const firebaseConfig = {
+//   apiKey: Config.FIREBASE_API_KEY,
+//   authDomain: Config.FIREBASE_AUTH_DOMAIN,
+//   projectId: Config.FIREBASE_PROJECT_ID,
+//   storageBucket: "smallworld-b093d.appspot.com",
+
+//   appId: Config.FIREBASE_APP_ID,
+// };
 
 
 // Known error where the initializeApp() tries to load app multiple time
@@ -79,7 +81,7 @@ export const getPhotoUrl = async (imageName) => {
   return downloadUrl;
 };
 
-export const firebaseUpload = async (uri, name) => {
+export const firebaseUpload = async (imageUri, name) => {
   //console.log("config file fileName: " + name);
   //get the URI
   const fetchResponse = await fetch(imageUri);
