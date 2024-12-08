@@ -93,6 +93,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
+        manifestPlaceholders = [
+            'appAuthRedirectScheme': 'com.anonymous.SmallWorldProject'
+        ]
     }
     signingConfigs {
         debug {
@@ -147,6 +150,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.core:core:1.13.1'
+    implementation 'androidx.versionedparcelable:versionedparcelable:1.1.1'
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
 

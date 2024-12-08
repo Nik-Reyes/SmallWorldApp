@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "771499224120",
+    "project_id": "smallworld-b093d",
+    "storage_bucket": "smallworld-b093d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771499224120:android:29181182d3d56675a9cacd",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.SmallWorld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771499224120-rld04ltaahfduqovf0kr35u4jfs00478.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZmMdaGlnU3CtcoKD8No-aQ28CvVWDmf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771499224120-rld04ltaahfduqovf0kr35u4jfs00478.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "771499224120-pdgdq6c55032aqn55epbs52i56lm224q.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.DefaultCompany.SmallWorld"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

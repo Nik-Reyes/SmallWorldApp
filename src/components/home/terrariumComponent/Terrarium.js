@@ -1,28 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
 import { View, Text, Platform, Alert } from "react-native";
-import UnityView from "@azesmway/react-native-unity";
+import UnityView from "@azesmway/react-native-unity/lib/commonjs";//lib/typescript/src";
 import { dynamicContainerStyles } from "../../../hooks/buttonDimensions";
 import { styles } from "../../../styles/Home.styles";
 import Button from "../Button/Button";
 
 const terrariumImage = require("../../../../assets/images/garden.png");
 
+console.log("UnityView:", UnityView);
+if (!UnityView) {
+  console.warn("UnityView is null");
+}
+
 export default function Terrarium() {
   const [isUnityVisible, setUnityVisible] = useState(false);
   const [isUnitySupported, setUnitySupported] = useState(true);
   const unityRef = useRef(null);
   const dynamicContainer = dynamicContainerStyles();
-
-  useEffect(() => {
-    // Check Unity View support
-    if (Platform.OS === 'android' && !UnityView) {
-      setUnitySupported(false);
-      Alert.alert(
-        "Unity Integration Error",
-        "Unity View is not properly configured in this project."
-      );
-    }
-  }, []);
 
   const terrariumButtonPress = () => {
     if (!isUnitySupported) {
@@ -32,6 +26,7 @@ export default function Terrarium() {
       );
       return;
     }
+    console.log("Got Here");
     setUnityVisible(true);
     console.log("Terrarium Button Pressed");
   };
@@ -56,7 +51,6 @@ export default function Terrarium() {
 
       {isUnityVisible ? (
         <View style={{ flex: 1 }}>
-          {Platform.OS === 'android' && UnityView ? (
             <UnityView
               ref={unityRef}
               style={{ flex: 1 }}
@@ -64,13 +58,6 @@ export default function Terrarium() {
                 console.log("Unity Message Received:", result.nativeEvent.message);
               }}
             />
-          ) : (
-            <Text>Unity View is not available</Text>
-          )}
-          <Button 
-            label="Close Terrarium" 
-            onPress={handleCloseUnity} 
-          />
         </View>
       ) : (
         <View style={styles.terrariumButtonContainer}>

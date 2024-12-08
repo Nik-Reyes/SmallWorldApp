@@ -9,8 +9,6 @@ pluginManagement {
 
 include ':launcher', ':unityLibrary'
 include 'unityLibrary:FirebaseApp.androidlib'
-include ':FirebaseApp.androidlib'
-project(':FirebaseApp.androidlib').projectDir=new File('..\\android\\unityLibrary\\FirebaseApp.androidlib')
 
 
 dependencyResolutionManagement {

@@ -21,7 +21,7 @@ android {
         targetSdkVersion 34
         applicationId 'com.DefaultCompany.SmallWorld'
         ndk {
-            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+            abiFilters 'armeabi-v7a'
         }
         versionCode 1
         versionName '0.1'
@@ -52,9 +52,6 @@ android {
 
     packagingOptions {
         doNotStrip '*/armeabi-v7a/*.so'
-        doNotStrip '*/arm64-v8a/*.so'
-        doNotStrip '*/x86/*.so'
-        doNotStrip '*/x86_64/*.so'
         jniLibs {
             useLegacyPackaging true
         }
