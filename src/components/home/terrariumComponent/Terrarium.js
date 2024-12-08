@@ -1,5 +1,5 @@
-import React, { useState, useRef } from "react";
-import { View, Text } from "react-native";
+import React, { useState, useRef, useEffect } from "react";
+import { View, Text, Platform, Alert } from "react-native";
 import UnityView from "@azesmway/react-native-unity";
 import { dynamicContainerStyles } from "../../../hooks/buttonDimensions";
 import { styles } from "../../../styles/Home.styles";
@@ -9,12 +9,43 @@ const terrariumImage = require("../../../../assets/images/garden.png");
 
 export default function Terrarium() {
   const [isUnityVisible, setUnityVisible] = useState(false);
-  const unityRef = useRef(null)
+  const [isUnitySupported, setUnitySupported] = useState(true);
+  const unityRef = useRef(null);
   const dynamicContainer = dynamicContainerStyles();
 
+  useEffect(() => {
+    // Check Unity View support
+    if (Platform.OS === 'android' && !UnityView) {
+      setUnitySupported(false);
+      Alert.alert(
+        "Unity Integration Error",
+        "Unity View is not properly configured in this project."
+      );
+    }
+  }, []);
+
   const terrariumButtonPress = () => {
+    if (!isUnitySupported) {
+      Alert.alert(
+        "Unsupported Feature",
+        "Unity integration is not available on this device."
+      );
+      return;
+    }
     setUnityVisible(true);
     console.log("Terrarium Button Pressed");
+  };
+
+  const handleCloseUnity = () => {
+    setUnityVisible(false);
+  };
+
+  if (!isUnitySupported) {
+    return (
+      <View style={dynamicContainer("terrarium")}>
+        <Text>Unity integration is not supported on this device.</Text>
+      </View>
+    );
   }
 
   return (
@@ -24,13 +55,23 @@ export default function Terrarium() {
       </View>
 
       {isUnityVisible ? (
-        <UnityView
-          ref={unityRef}
-          style={{ flex: 1 }}
-          onUnityMessage={(result) => {
-            console.log("Unity Message Recieved:", result.nativeEvent.message);
-          }}
-        />
+        <View style={{ flex: 1 }}>
+          {Platform.OS === 'android' && UnityView ? (
+            <UnityView
+              ref={unityRef}
+              style={{ flex: 1 }}
+              onUnityMessage={(result) => {
+                console.log("Unity Message Received:", result.nativeEvent.message);
+              }}
+            />
+          ) : (
+            <Text>Unity View is not available</Text>
+          )}
+          <Button 
+            label="Close Terrarium" 
+            onPress={handleCloseUnity} 
+          />
+        </View>
       ) : (
         <View style={styles.terrariumButtonContainer}>
           <Button
