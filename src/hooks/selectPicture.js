@@ -12,7 +12,7 @@ export const useLibrary = () => {
       if (libraryPermission?.granted !== true) {
         const { status } = await setLibraryPermission();
         if (status !== "granted") {
-          alertMessage();
+          alertMessage("library");
           return null;
         }
       }

@@ -1,5 +1,6 @@
 import { firebaseUpload, getPhotoUrl } from "../services/firebaseConfig";
 import { Linking, Alert, Platform } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 
 //Function that opens up the app settings
 const openAppSettings = async () => {
@@ -13,12 +14,26 @@ const openAppSettings = async () => {
 export const alertMessage = () => {
   Alert.alert(
     "No access to camera",
-    "Access to the camera is needed to take photos",
+    "Please enable camera access in settings to take photos",
     [
       { text: "Cancel", style: "cancel" },
       { text: "Settings", onPress: () => openAppSettings() },
     ]
   );
+};
+
+export const requestCameraPermission = async () => {
+  try {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== "granted") {
+      alertMessage();
+      return false;
+    }
+    return true;
+  } catch (e) {
+    Alert.alert("Error: ", e.message);
+    return false;
+  }
 };
 
 export const obtainPhotoUrl = async (img) => {
