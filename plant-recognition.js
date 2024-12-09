@@ -35,7 +35,7 @@ const callPlantApi = async (downloadURL, organ) => {
       name: "image.jpg",
       type: "image/jpeg",
     });
-    form.append("organs", organ || "flower");  // Default organ is 'flower'
+    form.append("organs", organ || "auto");  // Default organ is 'flower'
 
     // Make API call to PlantNet
     const response = await axios.post(`${API_URL}?api-key=${API_KEY}`, form, {
