@@ -16,7 +16,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage:21.0.0' // Assets/Firebase/Editor/StorageDependencies.xml:13
     // implementation 'com.google.firebase:firebase-storage-unity:12.3.0' // Assets/Firebase/Editor/StorageDependencies.xml:20
 // Android Resolver Dependencies End
-    // implementation project('FirebaseApp.androidlib')
+    implementation project(':unityLibrary:FirebaseApp.androidlib')
 
 }
 
