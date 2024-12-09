@@ -1,33 +1,72 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { doc } from "firebase/firestore";
-import { useEffect } from "react";
+import { doc, setDoc, increment, arrayUnion, query, where, collection, getDocs, updateDoc } from "firebase/firestore";
+import { useContext, useEffect, useState } from "react";
 import { FlatList, StyleSheet, View, Image,  } from "react-native";
 import { Text, IconButton } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { fbAuth, fbFireStore } from "../services/firebaseConfig";
 import { useNavigation } from "@react-navigation/native";
+import AuthContext from "../services/authContext";
 
 export default function Results({ route }){
 
     const navigation = useNavigation()
     const { results, photo } = route.params
+    const { user } = useContext(AuthContext)
 
-    // useEffect(() => {
-    //     const fetchUserData = async() => {
-    //         try {
-    //             // Add plant to firebase
-    //             const name = results[0].species.commonNames[0]
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                if (results.score < 90) {
+                    return 
+                }
+                
+                const commonNames = results[0].species.commonNames
+                const name = commonNames.reduce((a, b) => a.length <= b.length ? a : b)
+                const species = results[0].species.scientificName
+                const description = ''
+                const nativeHabitat = ''
+    
+                const plantCollection = collection(fbFireStore, "plants")
+                const q = query(plantCollection, where('species', '==', species))
+                const plantSnap = await getDocs(q)
 
-    //             const terrariumRef = doc(fbFireStore, "terrariums", fbAuth.currentUser.uid)
-    //             await updateDoc(terrariumRef, {
-    //                 totalPlantsFound: increment(1)
-    //             });
-    //         } catch (error) {
-    //             console.log("Error Fetching your Data:", error)
-    //         }
-    //     }
-    //     fetchUserData()
-    // }, [])
+                let plantRef;
+                if (plantSnap.empty) {
+                    const newPlantRef = doc(plantCollection)
+                    plantRef = newPlantRef;
+                    await setDoc(newPlantRef, {
+                        name: name,
+                        species: species,
+                        description: description,
+                        nativeHabitat: nativeHabitat,
+                    });
+                } else {
+                    // If the plant already exists, get the first match
+                    plantRef = plantSnap.docs[0].ref;
+                }
+    
+                // Update user stats if the user is authenticated
+                if (user) {
+                    const terrariumRef = doc(fbFireStore, "terrariums", user.uid);
+                    console.log(plantRef.id)
+                    await updateDoc(terrariumRef, {
+                        totalPlantsFound: increment(1),
+                        foundPlants: arrayUnion(plantRef)
+                    });
+                } else {
+                    console.log("User not authenticated.");
+                    }
+                
+    
+            } catch (error) {
+                console.log("Error fetching your data:", error);
+            }
+        };
+    
+        fetchUserData();
+    }, []);
+
 
     return (
         <SafeAreaView style={styles.container}>
@@ -54,7 +93,7 @@ export default function Results({ route }){
                         <View
                             style={[
                                 styles.resultItem,
-                                index === 0 ? { backgroundColor: '#48AC54' } : {} // Apply blue background to the first item
+                                index === 0 ? { backgroundColor: '#48AC54' } : {} 
                             ]}
                         >
                             <Text>
