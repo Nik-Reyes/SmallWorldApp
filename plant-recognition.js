@@ -4,8 +4,9 @@ import { PLANTNET_API_KEY } from "@env";  // Make sure the API key is correctly 
 import * as FileSystem from "expo-file-system";
 
 // Define constants
-const API_KEY = PLANTNET_API_KEY || '2b10AYemxBmUt7qKBoWFpFq9u'; // Use .env or fallback
+const API_KEY = "2b10IaMdcjfI12UWRTNzi0lUu" // PLANTNET_API_KEY; // Use .env or fallback
 const API_URL = `https://my-api.plantnet.org/v2/identify/all`;
+console.log(API_KEY)
 
 // Function to download the image from Firebase URL to local file
 const downloadImage = async (url) => {
@@ -28,7 +29,7 @@ const callPlantApi = async (downloadURL, organ) => {
     const localUri = await downloadImage(downloadURL);
     console.log("Downloaded image locally at:", localUri);
 
-    const form = new FormData();
+    let form = new FormData();
     form.append("images", {
       uri: localUri,
       name: "image.jpg",
@@ -46,6 +47,8 @@ const callPlantApi = async (downloadURL, organ) => {
     // Process the response from the API
     if (response.data && response.data.results) {
       console.log("Identified plants:", response.data.results);
+      alert('results found')
+      return response.data.results
       // You can process the results here, e.g., display or store the results
     } else {
       console.warn("No results from PlantNet API.");
