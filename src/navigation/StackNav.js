@@ -8,7 +8,7 @@ import TabNav from "./TabNav.js";
 import SignIn from "../screens/SignIn.js";
 import Register from "../screens/Register.js"
 import ProfileScreen from "../screens/Profile.js";
-
+import Results from "../screens/Results.js";
 const Stack = createStackNavigator();
 
 export default function HomeStack() {
@@ -16,6 +16,7 @@ export default function HomeStack() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Main" component={TabNav} />
+        <Stack.Screen name="Results" component={Results} />
         <Stack.Screen name="Explore" component={Explore} />
         <Stack.Screen name="Learn" component={Learn} />
         <Stack.Screen name="Care" component={Care} />
