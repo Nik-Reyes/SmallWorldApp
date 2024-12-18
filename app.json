@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "SmallWorldProject",
+    "slug": "SmallWorldProject",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/smallWorldIcon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/images/smallWorldSplash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to let you take photos for your profile."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "androidNavigationBar": {
+      "backgroundColor": "#00000000",
+      "visible": "immersive"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your camera roll",
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
+        }
+      ],
+      "expo-font",
+      "expo-asset"
+    ]
+  }
+}
