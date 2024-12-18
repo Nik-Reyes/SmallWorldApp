@@ -17,7 +17,7 @@ export default function Results({ route }){
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                if (results.score < 90) {
+                if (results.score < 25.0) {
                     return 
                 }
                 
@@ -54,9 +54,7 @@ export default function Results({ route }){
                         totalPlantsFound: increment(1),
                         foundPlants: arrayUnion(plantRef)
                     });
-                } else {
-                    console.log("User not authenticated.");
-                    }
+                }
                 
     
             } catch (error) {
@@ -87,7 +85,7 @@ export default function Results({ route }){
             {results && results.length > 0 ?
                 
                 <FlatList
-                    data={results}
+                    data={results.slice(0, 5)}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
                         <View
@@ -106,7 +104,7 @@ export default function Results({ route }){
                     style={{ width: '100%' }}
                 />
             :
-                <Text style={styles.noResults}>No results found.</Text>
+                <Text style={styles.noResults}>No results found. Please Try Again.</Text>
             }
         </SafeAreaView>
     );

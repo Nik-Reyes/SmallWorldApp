@@ -13,7 +13,12 @@ const downloadImage = async (url) => {
   try {
     const localUri = `${FileSystem.documentDirectory}${url.split('/').pop()}`;
     console.log("Downloading image from URL:", url, "to local URI:", localUri);
-    await FileSystem.downloadAsync(url, localUri);
+    try {
+      await FileSystem.downloadAsync(url, localUri);
+    } catch (error) {
+      console.log('asdasdadsd')
+      return url
+    }
     return localUri;
   } catch (error) {
     console.error("Error downloading image:", error);
@@ -55,7 +60,7 @@ const callPlantApi = async (downloadURL, organ) => {
     }
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.error("Axios Error:", error.response?.data || error.message);
+      console.error("Axios Error:", error);
     } else {
       console.error("Error calling API:", error);
     }
