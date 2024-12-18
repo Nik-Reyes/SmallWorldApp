@@ -7,7 +7,11 @@ export default function Search() {
 
   return (
     <TextInput
+<<<<<<< HEAD
       left={<TextInput.Icon icon="magnify" />}
+=======
+      left={<TextInput.Icon icon="magnify" color={() => "#253b35"} />}
+>>>>>>> main
       mode="outlined"
       value={text}
       onChangeText={onChangeText}
@@ -15,12 +19,20 @@ export default function Search() {
       placeholderTextColor="grey"
       autoCorrect={false}
       autoCapitalize="none"
+<<<<<<< HEAD
       outlineColor="#76B947"
+=======
+      outlineColor="#fcfefd"
+>>>>>>> main
       keyboardAppearance="light"
       style={styles.searchInput}
       theme={{
         colors: {
+<<<<<<< HEAD
           primary: "#76B947",
+=======
+          primary: "#253b35",
+>>>>>>> main
         },
         roundness: 30,
       }}

@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "",
+        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       }
     },
@@ -28,7 +28,7 @@
       "visible": "immersive"
     },
     "web": {
-      "favicon": ""
+      "favicon": "./assets/favicon.png"
     },
     "plugins": [
       [

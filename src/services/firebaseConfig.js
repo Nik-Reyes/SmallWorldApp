@@ -1,24 +1,45 @@
+<<<<<<< HEAD
 import { initializeApp, getApp, getApps, } from "firebase/app";
 import {getAuth, initializeAuth } from 'firebase/auth';
 import { getReactNativePersistence } from '@firebase/auth/dist/rn/index.js';
 import { getFirestore } from "firebase/firestore";
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
+=======
+import { initializeApp, getApp, getApps } from 'firebase/app';
+>>>>>>> main
 import {
   getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
+<<<<<<< HEAD
 } from "firebase/storage";
+=======
+} from 'firebase/storage';
+import {
+  initializeAuth,
+  getReactNativePersistence,
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+>>>>>>> main
 import {
   FIREBASE_API_KEY,
   FIREBASE_STORAGE_BUCKET,
   FIREBASE_APP_ID,
   FIREBASE_PROJECT_ID,
   FIREBASE_AUTH_DOMAIN,
+<<<<<<< HEAD
 } from "@env";
 import { getFirestore } from "firebase/firestore";
 import {getAuth } from 'firebase/auth';
+=======
+} from '@env';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+>>>>>>> main
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
@@ -30,12 +51,17 @@ const firebaseConfig = {
 
 // Known error where the initializeApp() tries to load app multiple time
 // load only when the app has not been initialised
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
 if (getApps().length === 0) {
   initializeApp(firebaseConfig);
 }
 
 const fbApp = getApp();
 const fbStorage = getStorage();
+<<<<<<< HEAD
 const app =initializeApp(firebaseConfig)
 const db = getFirestore(app)
 <<<<<<< HEAD:firebaseConfig.js
@@ -47,6 +73,12 @@ export const fireAuth = getAuth(app)
 =======
 const fireAuth = getAuth(app)
 >>>>>>> main:src/services/firebaseConfig.js
+=======
+const fbFireStore = getFirestore(fbApp);
+const fbAuth = initializeAuth(fbApp, {
+  persistence: getReactNativePersistence(AsyncStorage),
+});
+>>>>>>> main
 
 export const getPhotoUrl = async (imageName) => {
   const storage = getStorage();
@@ -70,7 +102,11 @@ export const firebaseUpload = async (uri, name) => {
   return new Promise((resolve, reject) => {
     uploadTask.on(
       //listens for any state changes
+<<<<<<< HEAD
       "state_changed",
+=======
+      'state_changed',
+>>>>>>> main
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -90,8 +126,13 @@ export const firebaseUpload = async (uri, name) => {
     );
   });
 };
+<<<<<<< HEAD
 <<<<<<< HEAD:firebaseConfig.js
 export { db,fbApp, fbStorage, firebaseUpload, getPhotoUrl };
 =======
 export { fbApp, fbStorage, db, fireAuth };
 >>>>>>> main:src/services/firebaseConfig.js
+=======
+
+export { fbApp, fbStorage, fbFireStore, fbAuth };
+>>>>>>> main
