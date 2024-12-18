@@ -1,11 +1,3 @@
-{ "pid": 26168, "tid": -1, "ph": "M", "name": "process_name", "args": { "name": "BeeDriver" } },
-{ "pid": 26168, "tid": -1, "ph": "M", "name": "process_sort_index", "args": { "sort_index": "-2" } },
-{ "pid": 26168, "tid": 1, "ph": "M", "name": "thread_name", "args": { "name": "Main thread" } },
-{ "pid": 26168, "tid": 1, "ts": 1734563228354683, "dur": 563690, "ph": "X", "name": "Build FinalProgram", "args": {} },
-{ "pid": 26168, "tid": 1, "ts": 1734563228358244, "dur": 35775, "ph": "X", "name": "Writing build program input data", "args": {} },
-{ "pid": 26168, "tid": 1, "ts": 1734563228394072, "dur": 524149, "ph": "X", "name": "Running build system backend", "args": {} },
-{ "pid": 26168, "tid": 1, "ts": 1734563228918271, "dur": 102, "ph": "X", "name": "Finishing", "args": {} },
-{ "pid": 26168, "tid": 1, "ts": 1734563228930987, "dur": 2408, "ph": "X", "name": "Main thread", "args": {} },
 { "cat":"", "pid":12345, "tid":0, "ts":0, "ph":"M", "name":"process_name", "args": { "name":"bee_backend" } }
 ,{ "pid":12345, "tid":0, "ts":1734563228445292, "dur":46056, "ph":"X", "name": "DriverInitData",  "args": { "detail":"" }}
 ,{ "pid":12345, "tid":0, "ts":1734563228491373, "dur":1891, "ph":"X", "name": "RemoveStaleOutputs",  "args": { "detail":"" }}
@@ -3298,6 +3290,4 @@
 ,{ "pid":12345, "tid":16, "ts":1734563228692128, "dur":91, "ph":"X", "name": "OutputFilesMissingFor",  "args": { "detail":"" }}
 ,{ "pid":12345, "tid":16, "ts":1734563228692265, "dur":175083, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
 ,{ "pid":12345, "tid":0, "ts":1734563228889339, "dur":14736, "ph":"X", "name": "ProfilerWriteOutput" }
-,{ "pid": 26168, "tid": 1, "ts": 1734563228933817, "dur": 1360, "ph": "X", "name": "Wait for external events", "args": {"First to finish": "backend_profiler0.traceevents"} },
-{ "pid": 26168, "tid": 1, "ts": 1734563228935285, "dur": 1961, "ph": "X", "name": "backend_profiler0.traceevents", "args": {} },
-{ "pid": 26168, "tid": 1, "ts": 1734563228930155, "dur": 8655, "ph": "X", "name": "Write chrome-trace events", "args": {} },
+,
