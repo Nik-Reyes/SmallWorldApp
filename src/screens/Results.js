@@ -40,6 +40,7 @@ export default function Results({ route }){
                         species: species,
                         description: description,
                         nativeHabitat: nativeHabitat,
+                        url: photo
                     });
                 } else {
                     // If the plant already exists, get the first match
