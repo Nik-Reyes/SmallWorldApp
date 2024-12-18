@@ -7,7 +7,6 @@ import { Asset } from 'expo-asset';
 import { AuthProvider } from './src/services/authContext';
 import { PostsContextProvider } from './src/context/PostsContext';
 
-
 SplashScreen.preventAutoHideAsync();
 
 const Images = [
@@ -65,4 +64,3 @@ export default function App() {
     </AuthProvider>
   );
 }
-
