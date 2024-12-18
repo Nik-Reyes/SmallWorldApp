@@ -1,16 +1,17 @@
 // React, React Native, & Expo Imports
-import HomeStack from "./src/navigation/StackNav";
-import { useCallback, useEffect, useState } from "react";
-import { View, SafeAreaView } from "react-native";
-import * as SplashScreen from "expo-splash-screen";
-import { Asset } from "expo-asset";
-import { AuthProvider } from "./src/services/authContext";
+import HomeStack from './src/navigation/StackNav';
+import { useCallback, useEffect, useState } from 'react';
+import { View } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
+import { Asset } from 'expo-asset';
+import { AuthProvider } from './src/services/authContext';
+import { PostsContextProvider } from './src/context/PostsContext';
 
 SplashScreen.preventAutoHideAsync();
 
 const Images = [
-  require("./assets/images/TopComponent.png"),
-  require("./assets/images/garden.png"),
+  require('./assets/images/TopComponent.png'),
+  require('./assets/images/garden.png'),
 ];
 
 export default function App() {
@@ -21,14 +22,14 @@ export default function App() {
       try {
         // console.log("Prepping images...");
         const assetImages = Images.map((image) => {
-          if (typeof image === "number") {
+          if (typeof image === 'number') {
             // console.log("image", image);
             return Asset.fromModule(image).downloadAsync();
           }
           return Asset.fromURI(image).downloadAsync();
         });
         await Promise.all(assetImages);
-        console.log("All images processed");
+        console.log('All images processed');
         setAppIsReady(true);
       } catch (e) {
         console.warn(e);
@@ -42,22 +43,24 @@ export default function App() {
       try {
         await SplashScreen.hideAsync();
       } catch (error) {
-        console.warn("Error hiding splash screen")
+        console.warn('Error hiding splash screen');
       }
-      
     }
   }, [appIsReady]);
 
   if (!appIsReady) {
-    return null; // Render nothing until ready
+    return null;
+    // Render nothing until ready
   }
 
   // App view
   return (
     <AuthProvider>
-      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-        <HomeStack />
-      </View>
+      <PostsContextProvider>
+        <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+          <HomeStack />
+        </View>
+      </PostsContextProvider>
     </AuthProvider>
   );
 }
