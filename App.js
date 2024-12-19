@@ -203,6 +203,7 @@ import { callPlantApi, processImage } from "./plant-recognition";
 
 // Auth Context Import
 import { AuthProvider } from "./src/services/authContext";
+import { PostsContextProvider } from './src/context/PostsContext';
 
 SplashScreen.preventAutoHideAsync();
 
