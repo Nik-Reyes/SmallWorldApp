@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, StyleSheet, Alert } from "react-native";
-import { Button, ActivityIndicator, TextInput } from "react-native-paper";
+import { StyleSheet, Alert, View, TouchableOpacity } from "react-native";
+import { Text, Button, ActivityIndicator, TextInput, IconButton, Avatar } from "react-native-paper";
 import { fbAuth, fbFireStore } from "../services/firebaseConfig";
 import { 
     EmailAuthProvider, 
@@ -17,20 +17,24 @@ export default function ProfileScreen() {
 
     const [deleteAccount, setDeleteAccount] = useState(false)
     const [password, setPassword] = useState('')
-    const [data, setData] = useState(null)
-    const [dataFetched, setDataFetched] = useState(false)
+    const [userData, setData] = useState(null)
+    const [terrariumData, setTerrariumData] = useState(null)
     useEffect(() => {
         const fetchUserData = async() => {
             try {
-                const docRef = doc(fbFireStore, "users", fbAuth.currentUser.uid)
-                const docSnap = await getDoc(docRef)
+                const userRef = doc(fbFireStore, "users", fbAuth.currentUser.uid)
+                const userRefSnap = await getDoc(userRef)
 
-                if(docSnap.exists()) {
-                    setData(docSnap.data())
-                    setDataFetched(true)
-                } else {
-                    alert('No user data exists!?')
+                if(userRefSnap.exists()) {
+                    setData(userRefSnap.data())
+                } 
+
+                const terrariumDoc = doc(fbFireStore, "terrariums", fbAuth.currentUser.uid)
+                const terrariumSnap = await getDoc(terrariumDoc)
+                if (terrariumSnap.exists()) {
+                    setTerrariumData(terrariumSnap.data())
                 }
+
             } catch (error) {
                 console.log("Error Fetching your Data:", error)
             }
@@ -115,43 +119,63 @@ export default function ProfileScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text>Profile Page </Text>
-            {dataFetched ? 
+            <View
+                style={styles.header}
+            >
+                <IconButton
+                    icon="chevron-left"
+                    size={30}
+                    onPress={() => navigation.goBack()}
+                />
+                <Button
+                    onPress={handleSignOut}
+                    textColor='#48AC54'
+                >
+                    Sign-Out
+                </Button>
+            </View>
+
+            {userData && terrariumData ? 
                 <>
-                    <Text>Username: {dataFetched ? data.username : "Loading..."}</Text>
-                    <Text>Email: {dataFetched ? data.email : "Loading..."}</Text>
+                    <View
+                        style={{alignItems: 'center'}}
+                    >
+                        <Avatar.Icon 
+                            size={100} 
+                            icon="account" 
+                            color="white"
+                            style={{backgroundColor: '#48AC54'}}
+                        />
+                        <Text
+                            variant="titleLarge"
+                            style={{fontWeight: 'bold', marginTop: 10}}
+                        >
+                            {userData.username}
+                        </Text>
+                        <Text
+                            variant="titleMedium"
+                        >
+                            {userData.email}
+                        </Text>
+                    </View>
+
+                    <View
+                        style={[styles.card, {marginTop: 20}]}
+                    >
+                        <Text variant="headlineSmall" style={{fontWeight: "bold"}}>Joined</Text>
+                        <Text variant="titleMedium">{userData.joined.toDate().toLocaleDateString()}</Text>
+                    </View>
+
+                    <View
+                        style={styles.card}
+                    >
+                        <Text variant="headlineSmall" style={{fontWeight: "bold"}}>Plants Discovered</Text>
+                        <Text variant="titleMedium">Total: {terrariumData.totalPlantsFound}</Text>
+                    </View>
+
                 </>
                 :
                 <ActivityIndicator animating={true} color="green" />
-            }
-            <Button
-                onPress={() => console.log(data, fbAuth.currentUser)}
-            >
-                Show data
-            </Button>
-            <Button
-                onPress={handleSignOut}
-            >
-                Sign Out
-            </Button>
-            {deleteAccount ?
-                <>
-                    <TextInput
-                        mode="outlined"
-                        placeholder="Enter Password"
-                        value={password}
-                        onChangeText={password => setPassword(password)}
-                        activeOutlineColor="#76B947"
-                    />
-                    <Button onPress={() => setDeleteAccount(false)}>Go Back</Button>
-                    <Button onPress={() => handleDeletion(password)}>Confirm Delete Account</Button>
-                </>
-                :
-                <Button
-                    onPress={() => setDeleteAccount(true)}
-                >
-                    Delete Account
-                </Button>
             }
             
         </SafeAreaView>
@@ -163,5 +187,23 @@ const styles = StyleSheet.create({
         paddingLeft: 24,
         paddingRight: 24,
         paddingBottom:"5%",
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between', 
+    },
+    card: {
+        marginTop: 10,
+        flexDirection: 'column',
+        backgroundColor: '#48AC54',
+        padding: 10,
+        borderRadius: 15
+    },  
+    button: {
+        backgroundColor: 'lightgrey',
+        borderRadius: 5,
+        borderWidth: 1,
+        marginTop: 10
     }
 })
