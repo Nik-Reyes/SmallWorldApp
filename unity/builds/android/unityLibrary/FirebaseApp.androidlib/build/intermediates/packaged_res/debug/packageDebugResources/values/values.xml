@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">771499224120-rld04ltaahfduqovf0kr35u4jfs00478.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">771499224120</string>
+    <string name="google_api_key" translatable="false">AIzaSyBZmMdaGlnU3CtcoKD8No-aQ28CvVWDmf0</string>
+    <string name="google_app_id" translatable="false">1:771499224120:android:29181182d3d56675a9cacd</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBZmMdaGlnU3CtcoKD8No-aQ28CvVWDmf0</string>
+    <string name="google_storage_bucket" translatable="false">smallworld-b093d.appspot.com</string>
+    <string name="project_id" translatable="false">smallworld-b093d</string>
+</resources>

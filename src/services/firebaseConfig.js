@@ -1,14 +1,14 @@
 import Config from 'react-native-config';
 
 import * as FileSystem from 'expo-file-system';
-import { initializeApp, getApp, getApps } from "firebase/app";
+import { initializeApp, getApp, getApps } from 'firebase/app';
 import {
   getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
-} from "firebase/storage";
-import { 
+} from 'firebase/storage';
+import {
   initializeAuth,
   getReactNativePersistence,
   getAuth,
@@ -25,9 +25,9 @@ import {
   FIREBASE_APP_ID,
   FIREBASE_PROJECT_ID,
   FIREBASE_AUTH_DOMAIN,
-} from "@env";
+} from '@env';
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // import {
 //   FIREBASE_API_KEY,
@@ -63,15 +63,14 @@ const firebaseConfig = {
 
 if (getApps().length === 0) {
   initializeApp(firebaseConfig);
-  
 }
 
 const fbApp = getApp();
 const fbStorage = getStorage();
 const fbFireStore = getFirestore(fbApp);
 const fbAuth = initializeAuth(fbApp, {
-  persistence: getReactNativePersistence(AsyncStorage)
-})
+  persistence: getReactNativePersistence(AsyncStorage),
+});
 
 export const getPhotoUrl = async (imageName) => {
   const storage = getStorage();
@@ -118,7 +117,7 @@ export const firebaseUpload = async (imageUri, name) => {
   return new Promise((resolve, reject) => {
     uploadTask.on(
       //listens for any state changes
-      "state_changed",
+      'state_changed',
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -141,9 +140,4 @@ export const firebaseUpload = async (imageUri, name) => {
   });
 };
 
-export { 
-  fbApp, 
-  fbStorage, 
-  fbFireStore, 
-  fbAuth,
-}
+export { fbApp, fbStorage, fbFireStore, fbAuth }

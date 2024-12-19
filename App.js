@@ -207,8 +207,8 @@ import { AuthProvider } from "./src/services/authContext";
 SplashScreen.preventAutoHideAsync();
 
 const Images = [
-  require("./assets/images/TopComponent.png"),
-  require("./assets/images/garden.png"),
+  require('./assets/images/TopComponent.png'),
+  require('./assets/images/garden.png'),
 ];
 
 export default function App() {
@@ -226,7 +226,7 @@ export default function App() {
           return Asset.fromURI(image).downloadAsync();
         });
         await Promise.all(assetImages);
-        console.log("All images processed");
+        console.log('All images processed');
         setAppIsReady(true);
       } catch (e) {
         console.warn(e);
@@ -254,7 +254,8 @@ export default function App() {
   }, [appIsReady]);
 
   if (!appIsReady) {
-    return null; // Render nothing until ready
+    return null;
+    // Render nothing until ready
   }
 
   const alertMessage = () => {
@@ -361,9 +362,11 @@ export default function App() {
   // App view
   return (
     <AuthProvider>
-      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-        <HomeStack />
-      </View>
+      <PostsContextProvider>
+        <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+          <HomeStack />
+        </View>
+      </PostsContextProvider>
     </AuthProvider>
   );
 }
